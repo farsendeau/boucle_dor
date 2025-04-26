@@ -2,14 +2,19 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('styles/home.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <div class="container py-5">
-        <h1 class="h2">Bootstrap v5 Bug Report</h1>
-        <p>Have a bug report to share with us? Use this template to reproduce an isolated test case so we can more easily identify the problem and hopefully find a fix.</p>
-        <p>
-            <a class="btn btn-primary" href="https://github.com/twbs/bootstrap/blob/main/.github/CONTRIBUTING.md#bug-reports" rel="noopener noreferrer" target="_blank">Read bug report guidelines</a>
-        </p>
-        <p>Once you're set, replace the contents of this page and share the link with us in a <a href="https://github.com/twbs/bootstrap/issues/new/choose" rel="noopener noreferrer" target="_blank">new issue</a>.</p>
-        <p>Thanks! <span class="text-danger">♥</span></p>
+    <div class="container-fluid p-0">
+        <div class="image-wrapper">
+            <img src="{{ asset('images/home_background.webp') }}" class="img-fluid d-block w-100" alt="Image d'arrière-plan">
+
+            <div class="image-overlay">
+                <!-- Contenu à superposer sur l'image -->
+            </div>
+        </div>
     </div>
 {% endblock %}

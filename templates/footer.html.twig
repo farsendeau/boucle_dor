@@ -1,0 +1,73 @@
+<footer class="pt-5">
+    <div class="container pb-2">
+        <div class="row">
+            <!-- Colonne d'adresse -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <address itemscope itemtype="http://schema.org/LocalBusiness">
+                    <h5 itemprop="name">Au Gîte de Boucle d'Or</h5>
+                    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                        <p class="mb-0"><span itemprop="streetAddress">52 allée du chemin joli</span></p>
+                        <p class="mb-0"><span itemprop="postalCode">52809</span> <span itemprop="addressLocality">QuelquePart</span></p>
+                        <p><span itemprop="addressCountry">France</span></p>
+                    </div>
+                    <p class="mb-1">
+                        <a href="tel:+33102030506" itemprop="telephone" class="text-decoration-none">01 02 03 05 06</a>
+                    </p>
+                    <p class="mb-3">
+                        <a href="mailto:reservation@boucledor.fr" itemprop="email" class="text-decoration-none">reservation@boucledor.fr</a>
+                    </p>
+
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/boucledor" target="_blank" rel="noopener" aria-label="Suivez-nous sur Facebook" itemprop="sameAs" class="me-2">
+                            <img src="{{ asset('icons/facebook.svg') }}" alt="Facebook" width="30" height="30">
+                        </a>
+                        <a href="https://www.instagram.com/boucledor" target="_blank" rel="noopener" aria-label="Suivez-nous sur Instagram" itemprop="sameAs">
+                            <img src="{{ asset('icons/instagram.svg') }}" alt="Instagram" width="30" height="30">
+                        </a>
+                    </div>
+                </address>
+            </div>
+
+            <!-- Colonne des liens utiles -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <h5 class="mb-3">{{ 'home.useful_links'|trans }}</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none">{{ 'home.about'|trans|capitalize }}</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none">{{ 'home.contact'|trans }}</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none">{{ 'home.general_conditions_of_Sale'|trans }}</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none">{{ 'home.legal_notices'|trans }}</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-decoration-none">{{ 'home.personal_data'|trans }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Troisième colonne avec la carte -->
+            <div class="col-lg-4">
+                <h5 class="mb-3">{{ 'home.find_us'|trans }}</h5>
+                <div class="map-container" itemprop="hasMap">
+                    <a href="https://www.openstreetmap.org/search?query=52809%20QuelquePart%20France#map=15/48.8566/2.3522" target="_blank" rel="noopener" aria-label="Voir notre localisation sur OpenStreetMap">
+                        <img src="{{ asset('images/map.webp') }}" alt="Carte de localisation du Gîte de Boucle d'Or" class="img-fluid rounded" width="100%" height="auto">
+                    </a>
+                    <div class="mt-2 text-center">
+                        <small>{{ 'home.map_click_here'|trans }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright -->
+    <div class="row footer-end">
+        <div class="col-12 text-center">
+            <p class="mb-0">© {{ "now"|date("Y") }} Au Gîte de Boucle d'Or. {{ 'home.all_rights_reserved'|trans }}.</p>
+        </div>
+    </div>
+</footer>

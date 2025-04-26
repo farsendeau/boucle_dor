@@ -1,0 +1,130 @@
+:root {
+    /* Palette de couleurs principale */
+    --color-primary: #474329;        /* Couleur principale pour les titres */
+    --color-text: #000000;           /* Couleur de texte standard */
+    --color-alert-red: #D52222;      /* Couleur pour les alertes rouges */
+    --color-alert-grey: #707070;     /* Couleur pour les alertes grises */
+    --color-breadcrumb: #BCB893;     /* Couleur pour le fil d'Ariane */
+    --color-menu: #FFFFFF;           /* Couleur du texte du menu */
+    --color-site-name: #FFFFFF;
+    --color-footer-text: #FFFFFF;
+
+    /* Vous pouvez ajouter d'autres couleurs selon vos besoins */
+    --color-background: #FFFFFF;     /* Couleur de fond */
+    --color-background-2: #BCB893;     /* Couleur de fond 2 */
+    --color-link: #BCB893;           /* Couleur des liens */
+    --color-link-hover: #474329;     /* Couleur des liens au survol */
+
+    /* Couleurs pour des composants spécifiques */
+    --navbar-bg: #474329;            /* Couleur de fond de la navbar */
+}
+
+/* Titres */
+h1 {
+    font-family: "ivymode", serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 3.75rem; /* 45pt → 3.75rem (45pt ÷ 12pt = 3.75) */
+    color: var(--color-primary);
+}
+
+h2 {
+    font-family: "ivymode", serif;
+    font-weight: 700; /* Bold */
+    font-size: 2.5rem; /* 30pt → 2.5rem (30pt ÷ 12pt = 2.5) */
+    color: var(--color-primary);
+}
+
+/* Paragraphes */
+p {
+    font-family: 'darkmode-on', sans-serif;
+    font-weight: 400; /* Regular */
+    font-size: 1.67rem; /* 20pt → 1.67rem (20pt ÷ 12pt = 1.67) */
+    color: var(--color-text);
+}
+
+/* Listes à puces (H3) */
+h3, .liste-puce {
+    font-family: 'darkmode-on', sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 1.67rem; /* 20pt → 1.67rem (20pt ÷ 12pt = 1.67) */
+    color: var(--color-text);
+}
+
+/* Alertes et informations */
+.alerte, .info {
+    font-family: 'darkmode-on', sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 1rem; /* 12pt → 1rem (12pt ÷ 12pt = 1) */
+}
+
+.alerte-rouge {
+    color: var(--color-alert-red);
+}
+
+.alerte-gris {
+    color: var(--color-alert-grey);
+}
+
+/* Fil d'Ariane */
+.ariane {
+    font-family: 'darkmode-on', sans-serif;
+    font-weight: 400; /* Regular */
+    font-size: 1rem; /* 12pt → 1rem (12pt ÷ 12pt = 1) */
+    color: var(--color-breadcrumb);
+}
+
+/* Menu */
+.menu, .navbar-nav .nav-link {
+    font-family: 'darkmode-on', sans-serif;
+    font-size: 1rem; /* 18pt → 1.5rem (18pt ÷ 12pt = 1.5) */
+    color: var(--color-menu);
+}
+
+/* Liens */
+a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+header {
+    background-color: var(--color-background-2);
+}
+
+header .site-name, .site-name:hover {
+    font-family: "ivymode", serif;
+    font-weight: 400; /* Regular */
+    font-size: 2rem; /* 30pt → 2.5rem (30pt ÷ 12pt = 2.5) */
+    color: var(--color-site-name);
+}
+
+header .navbar-expand-lg {
+    padding: 0 !important;
+}
+
+footer {
+    background-color: var(--color-background-2);
+}
+
+footer p, footer span, footer a {
+    color: var(--color-footer-text);
+    font-family: "darkmode-on", sans-serif;
+    font-size: 0.83rem; /* 10pt → 0.83rem (10pt ÷ 12pt = 0.83) */
+}
+
+footer h5 {
+    /* Vous n'aviez pas de propriétés définies ici */
+    color: var(--color-footer-text);
+    font-family: "darkmode-on", sans-serif;
+    font-size: 1.25rem; /* 15pt → 1.25rem */
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+footer .footer-end {
+    background-color: var(--color-primary) !important;
+}

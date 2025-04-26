@@ -1,0 +1,51 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            {# Titre à gauche #}
+            <a class="navbar-brand site-name" href="{{ path('home_index') }}">
+               Au gîte de Boucle d'or
+            </a>
+
+            {# Bouton hamburger pour mobile #}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {# Éléments de navigation à droite #}
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'home.our_gites'|trans|upper }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{ 'home.about'|trans|upper }}</a>
+                    </li>
+                    <li class="nav-item pe-3">
+                        <a class="nav-link" href="#">{{ 'home.contact'|trans|upper }}</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarLangDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if app.request.locale == 'fr' %}FR{% else %}EN{% endif %}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarLangDropdown">
+                            <li>
+                                <a class="dropdown-item{% if app.request.locale == 'fr' %} active{% endif %}"
+                                   href="{{ path('locale_change', {locale: 'fr'}) }}">
+                                    {{ 'home.french'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item{% if app.request.locale == 'en' %} active{% endif %}"
+                                   href="{{ path('locale_change', {locale: 'en'}) }}">
+                                    {{ 'home.english'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
