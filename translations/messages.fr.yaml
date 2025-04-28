@@ -11,3 +11,8 @@ home:
     map_click_here: 'Cliquez sur la carte pour voir l''itinéraire'
     useful_links: 'Liens utiles'
     all_rights_reserved: 'Tous droits réservés'
+login:
+    logged_as: 'Vous êtes connecté en tant que {{ user }}'
+    logout: 'Deconnexion'
+    please_sign_in: 'Connexion'
+    sign_in: 'Se connecter'

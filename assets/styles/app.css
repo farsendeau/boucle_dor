@@ -19,6 +19,8 @@
     --navbar-bg: #474329;            /* Couleur de fond de la navbar */
 }
 
+
+
 /* Titres */
 h1 {
     font-family: "ivymode", serif;
@@ -89,6 +91,23 @@ a {
 
 a:hover {
     color: var(--color-link-hover);
+}
+
+/** Surcharge Boutons **/
+.btn-primary {
+    --bs-btn-bg: var(--color-background-2);
+    --bs-btn-border-color: var(--color-background-2);
+    --bs-btn-hover-bg: var(--color-alert-grey); /* Couleur plus foncée pour le hover */
+    --bs-btn-hover-border-color: var(--color-alert-grey);
+    --bs-btn-active-bg: var(--color-alert-grey);
+    --bs-btn-active-border-color: var(--color-alert-grey);
+}
+
+/* Surcharge de dropdown-item.active */
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: var(--color-background-2);
+    color: white;
 }
 
 header {
