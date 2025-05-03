@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Site\Site;
 use App\Entity\User;
+use App\Repository\Site\SiteRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -17,6 +19,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(
+        private readonly SiteRepository $siteRepository,
+    ) {
+    }
+
     public function index(): Response
     {
         return $this->render('admin/dashboard.html.twig');
@@ -44,14 +51,22 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard
     {
+        $site = $this->siteRepository->findOneBy([]);
+        $name = $site ? $site->getName() : 'App';
+        $homeUrl = $this->generateUrl('home_index');
+        $titleWithLink = sprintf('<a href="%s" class="pt-0">%s</a>', $homeUrl, $name);
+
         return Dashboard::new()
-            ->setTitle('App');
+            ->setTitle($name);
+
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateur Admin', 'fas fa-list', User::class);
+        yield MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home_index');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer');
+        yield MenuItem::linkToCrud('Configuration du site', 'fa fa-cog', Site::class);
+        yield MenuItem::linkToCrud('Utilisateur Admin', 'fa fa-list', User::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

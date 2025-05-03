@@ -3,7 +3,7 @@
         <div class="container">
             {# Titre à gauche #}
             <a class="navbar-brand site-name" href="{{ path('home_index') }}">
-               Au gîte de Boucle d'or
+               {{ siteGetInfo('name') }}
             </a>
 
             {# Bouton hamburger pour mobile #}
@@ -15,9 +15,6 @@
             {# Éléments de navigation à droite #}
             <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ 'home.our_gites'|trans|upper }}</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">{{ 'home.about'|trans|upper }}</a>
                     </li>
