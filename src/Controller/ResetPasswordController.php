@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Site\Site;
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
@@ -157,8 +158,12 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_check_email');
         }
 
+        $site = $this->entityManager->getRepository(Site::class)->findOneBy([]);
+        $fromMail = $site ? $site->getEmail() : '';
+        $fromName = $site ? $site->getName() : '';
+
         $email = (new TemplatedEmail())
-            ->from(new Address('frederic.arsendeau@gmail.com', 'mail'))
+            ->from(new Address($fromMail, $fromName))
             ->to((string) $user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('reset_password/email.html.twig')
