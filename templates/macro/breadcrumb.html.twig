@@ -1,0 +1,27 @@
+{% macro render(items) %}
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="{{ path('home_index') }}">
+                        <span itemprop="name">{{ 'home.home'|trans }}</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                {% for name, route in items %}
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        {% if not loop.last %}
+                            <a itemprop="item" href="{{ path(route) }}">
+                                <span itemprop="name">{{ name|trans }}</span>
+                            </a>
+                        {% else %}
+                            <span itemprop="name">{{ name|trans }}</span>
+                            <meta itemprop="item" content="{{ path(route) }}" />
+                        {% endif %}
+                        <meta itemprop="position" content="{{ loop.index + 1 }}" />
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </nav>
+{% endmacro %}

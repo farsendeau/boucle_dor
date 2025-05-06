@@ -18,7 +18,13 @@
     </head>
     <body>
         {% include "header.html.twig" %}
+        {% block breadcrumb %}{% endblock %}
+
+        {% if form is defined %}
+            {% form_theme form 'form/form_theme.html.twig' %}
+        {% endif %}
         {% block body %}{% endblock %}
+
         {% include "footer.html.twig" %}
     </body>
 </html>

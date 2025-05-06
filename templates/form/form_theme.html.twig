@@ -1,0 +1,9 @@
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{# --- LABEL AVEC ÉTOILE SI REQUIRED --- #}
+{% block form_label %}
+    {{ parent() }}
+    {% if required %}
+        <span>*</span>
+    {% endif %}
+{% endblock %}

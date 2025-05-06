@@ -10,8 +10,17 @@ home:
     map_click_here: 'Click on the map to see the route'
     useful_links: 'Useful links'
     all_rights_reserved: 'All rights reserved'
+    home: 'Home'
 login:
     logged_as: 'You are logged in as {{ user }}'
     logout: 'Logout'
     please_sign_in: 'Please sign in'
     sign_in: 'Sign in'
+contact:
+    lastname: 'Lastname'
+    firstname: 'Firstname'
+    mail: 'Mail'
+    tel: 'Phone'
+    message: 'My message'
+    submit: 'Submit'
+    mail_send_success: 'Your message has been sent successfully'

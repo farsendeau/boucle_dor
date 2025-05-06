@@ -7,7 +7,7 @@
     --color-breadcrumb: #BCB893;     /* Couleur pour le fil d'Ariane */
     --color-menu: #FFFFFF;           /* Couleur du texte du menu */
     --color-site-name: #FFFFFF;
-    --color-footer-text: #FFFFFF;
+    --color-footer-text: #707070;
 
     /* Vous pouvez ajouter d'autres couleurs selon vos besoins */
     --color-background: #FFFFFF;     /* Couleur de fond */
@@ -101,6 +101,7 @@ a:hover {
     --bs-btn-hover-border-color: var(--color-alert-grey);
     --bs-btn-active-bg: var(--color-alert-grey);
     --bs-btn-active-border-color: var(--color-alert-grey);
+    font-weight: 500;
 }
 
 /* Surcharge de dropdown-item.active */
@@ -110,8 +111,14 @@ a:hover {
     color: white;
 }
 
+/** Header */
+
 header {
     background-color: var(--color-background-2);
+}
+
+header ul a:hover {
+    color: var(--color-primary) !important;
 }
 
 header .site-name, .site-name:hover {
@@ -125,25 +132,65 @@ header .navbar-expand-lg {
     padding: 0 !important;
 }
 
+header a:hover {
+    color: var(--color-link-hover);
+}
+
+/* Breadcrumb */
+
+nav[aria-label="breadcrumb"] {
+    background-color: var(--color-primary) !important;
+}
+
+.breadcrumb-item span{
+    font-size: 0.8rem;
+}
+
+.breadcrumb-item, .breadcrumb-item, a {
+    color: var(--color-background-2)
+}
+
+.breadcrumb-item a:hover {
+    color: var(--color-background) !important;
+}
+
+/* Remplace le séparateur par défaut par un chevron > */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: var(--color-background-2); /* Couleur grise similaire à Bootstrap */
+}
+
+.custom_hr {
+    width: 50%;
+    border-top: 2px solid var(--color-background-2);
+}
+
+label, label + span {
+    color: var(--color-background-2);
+    font-weight: 500;
+}
+
 footer {
     background-color: var(--color-background-2);
 }
 
 footer p, footer span, footer a {
-    color: var(--color-footer-text);
+    color: var(--color-primary);
     font-family: "darkmode-on", sans-serif;
     font-size: 0.83rem; /* 10pt → 0.83rem (10pt ÷ 12pt = 0.83) */
 }
 
 footer h5 {
     /* Vous n'aviez pas de propriétés définies ici */
-    color: var(--color-footer-text);
+    color: var(--color-primary);
     font-family: "darkmode-on", sans-serif;
     font-size: 1.25rem; /* 15pt → 1.25rem */
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
-footer .footer-end {
+footer .footer-end, .footer-end p{
     background-color: var(--color-primary) !important;
+    color: var(--color-background-2);
+    font-size: 0.8rem;
 }

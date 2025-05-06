@@ -1,0 +1,15 @@
+.bg-contact-image {
+    height: 70vh; /* Ajustez cette hauteur selon les besoins */
+    background-image: url('../images/contact_background.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.container.position-relative {
+    margin-top: -100px;
+    margin-bottom: 100px;
+}
+
+textarea.form-control {
+    min-height: calc(12em + .75rem + calc(var(--bs-border-width) * 2)) !important;
+}

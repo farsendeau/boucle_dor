@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}}Home{% endblock %}
+{% block title %}{{parent()}}{{ 'home.home'|trans() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -10,7 +10,7 @@
 {% block body %}
     <div class="container-fluid p-0">
         <div class="image-wrapper">
-            <img src="{{ asset('images/home_background.webp') }}" class="img-fluid d-block w-100" alt="Image d'arrière-plan">
+            <div class="background-image-container"></div>
 
             <div class="image-overlay">
                 <!-- Contenu à superposer sur l'image -->

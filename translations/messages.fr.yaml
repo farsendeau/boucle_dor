@@ -10,8 +10,17 @@ home:
     map_click_here: 'Cliquez sur la carte pour voir l''itinéraire'
     useful_links: 'Liens utiles'
     all_rights_reserved: 'Tous droits réservés'
+    home: 'Accueil'
 login:
     logged_as: 'Vous êtes connecté en tant que {{ user }}'
     logout: 'Deconnexion'
     please_sign_in: 'Connexion'
     sign_in: 'Se connecter'
+contact:
+    lastname: 'Nom'
+    firstname: 'Prénom'
+    mail: 'Mail'
+    tel: 'Téléphone'
+    message: 'Mon message'
+    submit: 'Envoyer'
+    mail_send_success: 'Votre message a bien été envoyé'

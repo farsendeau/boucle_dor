@@ -11,3 +11,14 @@
     height: 100%;
     /* Styles additionnels pour votre contenu */
 }
+
+.background-image-container {
+    background-image: url('../images/home_background.webp');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 70vh; /* Ajustez cette hauteur selon les besoins */
+    display: block;
+    margin: 0;
+    padding: 0;
+}
