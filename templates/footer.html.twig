@@ -35,21 +35,29 @@
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <h5 class="mb-3">{{ 'home.useful_links'|trans }}</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2">
-                        <a href="#" class="text-decoration-none">{{ 'home.about'|trans|capitalize }}</a>
-                    </li>
+                    {% if legalPageIsDefined('about', app.locale) %}
+                        <li class="mb-2">
+                            <a href="{{ path('legal_page_index', {page: 'about'}) }}" class="text-decoration-none">{{ 'home.about'|trans|capitalize }}</a>
+                        </li>
+                    {% endif %}
                     <li class="mb-2">
                         <a href="{{ path('contact_index') }}" class="text-decoration-none">{{ 'home.contact'|trans }}</a>
                     </li>
-                    <li class="mb-2">
-                        <a href="#" class="text-decoration-none">{{ 'home.general_conditions_of_Sale'|trans }}</a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="text-decoration-none">{{ 'home.legal_notices'|trans }}</a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#" class="text-decoration-none">{{ 'home.personal_data'|trans }}</a>
-                    </li>
+                    {% if legalPageIsDefined('gcs', app.locale) %}
+                        <li class="mb-2">
+                            <a href="{{ path('legal_page_index', {page: 'gcs'}) }}" class="text-decoration-none">{{ 'home.general_conditions_of_Sale'|trans }}</a>
+                        </li>
+                    {% endif %}
+                    {% if legalPageIsDefined('legalNotice', app.locale) %}
+                        <li class="mb-2">
+                            <a href="{{ path('legal_page_index', {page: 'legalNotice'}) }}" class="text-decoration-none">{{ 'home.legal_notices'|trans }}</a>
+                        </li>
+                    {% endif %}
+                    {% if legalPageIsDefined('personalData', app.locale) %}
+                        <li class="mb-2">
+                            <a href="{{ path('legal_page_index', {page: 'personalData'}) }}" class="text-decoration-none">{{ 'home.personal_data'|trans }}</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
 

@@ -5,19 +5,26 @@ namespace App\Twig\Runtime;
 use App\Entity\Site\Site;
 use App\Repository\Site\SiteRepository;
 use Doctrine\Common\Collections\Collection;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Contracts\Cache\CacheInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 use Vich\UploaderBundle\Entity\File;
 
-class SiteInfoExtensionRuntime implements RuntimeExtensionInterface
+readonly class SiteInfoExtensionRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private readonly SiteRepository $siteRepository,
+        private SiteRepository $siteRepository,
+        private CacheInterface $cache,
     ) {
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getInfo(string $value): string|File|array|null
     {
-        $site = $this->siteRepository->findOneBy([]);
+        $site = $this->cache->get('site', fn () => $this->siteRepository->findOneBy([]));
+
         if (!$site) {
             return null;
         }

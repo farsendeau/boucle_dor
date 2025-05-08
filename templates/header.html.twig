@@ -15,9 +15,11 @@
             {# Éléments de navigation à droite #}
             <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ 'home.about'|trans|upper }}</a>
-                    </li>
+                    {% if legalPageIsDefined('about', app.locale) %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('legal_page_index', {page: 'about'}) }}">{{ 'home.about'|trans|upper }}</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item pe-3">
                         <a class="nav-link" href="{{ path('contact_index') }}">{{ 'home.contact'|trans|upper }}</a>
                     </li>

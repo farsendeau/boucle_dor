@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Site\LegalPage;
 use App\Entity\Site\Site;
 use App\Entity\User;
 use App\Repository\Site\SiteRepository;
@@ -53,8 +54,6 @@ class DashboardController extends AbstractDashboardController
     {
         $site = $this->siteRepository->findOneBy([]);
         $name = $site ? $site->getName() : 'App';
-        $homeUrl = $this->generateUrl('home_index');
-        $titleWithLink = sprintf('<a href="%s" class="pt-0">%s</a>', $homeUrl, $name);
 
         return Dashboard::new()
             ->setTitle($name);
@@ -65,8 +64,12 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home_index');
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer');
-        yield MenuItem::linkToCrud('Configuration du site', 'fa fa-cog', Site::class);
         yield MenuItem::linkToCrud('Utilisateur Admin', 'fa fa-list', User::class);
+
+        yield MenuItem::section('Site', 'fa fa-cog');
+        yield MenuItem::linkToCrud('Configuration du site', null, Site::class);
+        yield MenuItem::linkToCrud('Pages légales', null, LegalPage::class);
+
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

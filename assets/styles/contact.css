@@ -1,5 +1,5 @@
 .bg-contact-image {
-    height: 70vh; /* Ajustez cette hauteur selon les besoins */
+    height: 30vh; /* Ajustez cette hauteur selon les besoins */
     background-image: url('../images/contact_background.webp');
     background-size: cover;
     background-position: center;

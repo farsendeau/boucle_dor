@@ -21,8 +21,8 @@
 
         <div class="container position-relative">
             <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="card shadow-lg">
+                <div>
+                    <div class="card">
                         {% for label, messages in app.flashes %}
                             {% for message in messages %}
                                 <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
@@ -35,7 +35,7 @@
                         <div class="card-body p-5">
                             <h2 class="mb-4 text-center">{{ 'home.contact'|trans }}</h2>
                             <div class="mb-5 custom_hr mx-auto"></div>
-                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            {{ form_start(form) }}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     {{ form_row(form.lastname) }}
