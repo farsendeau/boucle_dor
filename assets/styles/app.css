@@ -114,6 +114,11 @@ a:hover {
     border-radius: 0;
 }
 
+/** surcharge dropdown menu */
+.dropdown-menu {
+    border-radius: 0 !important;
+}
+
 .card-img, .card-img-top, .card-img-bottom {
     border-radius: 0 !important;
 }
