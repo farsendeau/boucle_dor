@@ -102,6 +102,27 @@ a:hover {
     font-weight: 500;
 }
 
+.btn {
+    border-radius: 0;
+}
+
+/** surcharge des cards */
+.card {
+    --bs-card-border-width: 0;
+    --bs-card-border-radius: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.card-img, .card-img-top, .card-img-bottom {
+    border-radius: 0 !important;
+}
+
+/* Pour cibler spécifiquement les images */
+img.rounded {
+    border-radius: 0 !important;
+}
+
 /* Surcharge de dropdown-item.active */
 .dropdown-item.active,
 .dropdown-item:active {
