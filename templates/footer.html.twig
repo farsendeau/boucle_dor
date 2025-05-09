@@ -45,17 +45,17 @@
                     </li>
                     {% if legalPageIsDefined('gcs', app.locale) %}
                         <li class="mb-2">
-                            <a href="{{ path('legal_page_index', {page: 'gcs'}) }}" class="text-decoration-none">{{ 'home.general_conditions_of_Sale'|trans }}</a>
+                            <a href="{{ path('legal_page_index', {page: 'gcs'}) }}" class="text-decoration-none">{{ 'home.gcs'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if legalPageIsDefined('legalNotice', app.locale) %}
                         <li class="mb-2">
-                            <a href="{{ path('legal_page_index', {page: 'legalNotice'}) }}" class="text-decoration-none">{{ 'home.legal_notices'|trans }}</a>
+                            <a href="{{ path('legal_page_index', {page: 'legalNotice'}) }}" class="text-decoration-none">{{ 'home.legalNotice'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if legalPageIsDefined('personalData', app.locale) %}
                         <li class="mb-2">
-                            <a href="{{ path('legal_page_index', {page: 'personalData'}) }}" class="text-decoration-none">{{ 'home.personal_data'|trans }}</a>
+                            <a href="{{ path('legal_page_index', {page: 'personalData'}) }}" class="text-decoration-none">{{ 'home.personalData'|trans }}</a>
                         </li>
                     {% endif %}
                 </ul>

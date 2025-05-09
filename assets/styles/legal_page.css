@@ -1,0 +1,11 @@
+.bg-legal-page-image {
+    height: 30vh; /* Ajustez cette hauteur selon les besoins */
+    background-image: url('../images/legal_page_background.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.container.position-relative {
+    margin-top: -100px;
+    margin-bottom: 100px;
+}

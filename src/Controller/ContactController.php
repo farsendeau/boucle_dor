@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\DTO\Contact;
-use App\Entity\Site\Site;
 use App\Form\ContactType;
 use App\Repository\Site\SiteRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

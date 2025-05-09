@@ -4,20 +4,24 @@
 
 {% block breadcrumb %}
     {% import 'macro/breadcrumb.html.twig' as breadcrumb %}
-    {{ breadcrumb.render({
-        'home.contact': 'contact_index'
-    }) }}
+    {{ breadcrumb.render([
+        {
+            name: 'home.'~page,
+            route: 'legal_page_index',
+            params: {'page': page}
+        }
+    ]) }}
 {% endblock %}
 
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('styles/contact.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/legal_page.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
     <div class="position-relative">
-        <div class="bg-contact-image w-100"></div>
+        <div class="bg-legal-page-image w-100"></div>
 
         <div class="container position-relative">
             <div class="row justify-content-center">

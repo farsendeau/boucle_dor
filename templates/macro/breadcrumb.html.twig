@@ -8,15 +8,19 @@
                     </a>
                     <meta itemprop="position" content="1" />
                 </li>
-                {% for name, route in items %}
+                {% for item in items %}
                     <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        {% set route = item.route %}
+                        {% set params = item.params|default({}) %}
+                        {% set name = item.name %}
+
                         {% if not loop.last %}
-                            <a itemprop="item" href="{{ path(route) }}">
+                            <a itemprop="item" href="{{ path(route, params) }}">
                                 <span itemprop="name">{{ name|trans }}</span>
                             </a>
                         {% else %}
                             <span itemprop="name">{{ name|trans }}</span>
-                            <meta itemprop="item" content="{{ path(route) }}" />
+                            <meta itemprop="item" content="{{ path(route, params) }}" />
                         {% endif %}
                         <meta itemprop="position" content="{{ loop.index + 1 }}" />
                     </li>

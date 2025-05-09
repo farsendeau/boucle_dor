@@ -4,9 +4,12 @@
 
 {% block breadcrumb %}
     {% import 'macro/breadcrumb.html.twig' as breadcrumb %}
-    {{ breadcrumb.render({
-        'home.contact': 'contact_index'
-    }) }}
+    {{ breadcrumb.render([
+        {
+            name: 'home.contact',
+            route: 'contact_index'
+        }
+    ]) }}
 {% endblock %}
 
 
