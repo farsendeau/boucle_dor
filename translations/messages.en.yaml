@@ -24,3 +24,8 @@ contact:
     message: 'My message'
     submit: 'Submit'
     mail_send_success: 'Your message has been sent successfully'
+error_page:
+    error_title: 'Oops! An error has occurred'
+    error_p: 'Please try again later'
+    error_400_title: 'Oops! Page not found'
+    error_400_p: 'The page you are looking for doesn''t exist or has been moved.'

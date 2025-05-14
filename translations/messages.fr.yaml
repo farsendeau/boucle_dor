@@ -24,3 +24,9 @@ contact:
     message: 'Mon message'
     submit: 'Envoyer'
     mail_send_success: 'Votre message a bien été envoyé'
+error_page:
+    error_title: 'Oups ! Une erreur est survenue'
+    error_p: 'Veuillez réessayer ultérieurement'
+    error_400_title: 'Oups ! Page non trouvée'
+    error_400_p: 'La page que vous recherchez n''existe pas ou a été déplacée.'
+    
