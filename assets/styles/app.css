@@ -29,7 +29,7 @@ h1 {
 
 h2 {
     font-family: "ivymode", serif;
-    font-weight: 700; /* Bold */
+    font-weight: 400; /* Bold */
     font-size: 2.5rem; /* 30pt → 2.5rem (30pt ÷ 12pt = 2.5) */
     color: var(--color-primary);
 }
