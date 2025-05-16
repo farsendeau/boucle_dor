@@ -37,17 +37,7 @@ class ResetPasswordController extends AbstractController
     #[Route('/forgot_password_request/{email}', name: 'app_forgot_password_request')]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator, string $email): Response
     {
-//        $form = $this->createForm(ResetPasswordRequestFormType::class, ['email' => $email]);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $email = $form->get('email')->getData();
-//
-//        }
         return $this->processSendingPasswordResetEmail($email, $mailer, $translator);
-//        return $this->render('reset_password/request.html.twig', [
-//            'requestForm' => $form,
-//        ]);
     }
 
     /**
@@ -158,7 +148,7 @@ class ResetPasswordController extends AbstractController
         }
 
         $site = $this->entityManager->getRepository(Site::class)->findOneBy([]);
-        $fromMail = $site ? $site->getEmail() : '';
+        $fromMail = $site ? $site->getMail() : '';
         $fromName = $site ? $site->getName() : '';
 
         $email = (new TemplatedEmail())

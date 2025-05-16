@@ -23,11 +23,17 @@ readonly class SiteInfoExtensionRuntime implements RuntimeExtensionInterface
      */
     public function getInfo(string $value): string|File|array|null
     {
-        $site = $this->cache->get('site', fn () => $this->siteRepository->findOneBy([]));
+        $site = $this->cache->get('site', function () {
+            $site = $this->siteRepository->findOneBy([]);
+            // Forcer le chargement des relations
+            $site->getLinks()->initialize();
+            return $site;
+        });
 
         if (!$site) {
             return null;
         }
+
 
         if ('mapLocalization' === $value) {
             return [
@@ -37,7 +43,7 @@ readonly class SiteInfoExtensionRuntime implements RuntimeExtensionInterface
             ];
         }
 
-        $method = sprintf('get%s', ucfirst($value));
+        $method = sprintf('get%s', ucfirst($value));;
         if (!method_exists(Site::class, $method)) {
             return null;
         }

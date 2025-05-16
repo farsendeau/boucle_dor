@@ -14,6 +14,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
@@ -21,6 +23,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Contracts\Cache\CacheInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -57,14 +62,34 @@ class SiteCrudController extends AbstractCrudController
                 ->setFormTypeOption('translation_domain', false),
             TextField::new('address', 'Adresse')
                 ->setFormTypeOption('translation_domain', false),
-            TextField::new('codePostal', 'Code Postal')
-                ->setFormTypeOption('translation_domain', false),
+            NumberField::new('codePostal', 'Code Postal')
+                ->setFormTypeOption('translation_domain', false)
+                ->setStoredAsString(true) // Format string pour les cp commençant par 0
+                ->setNumberFormat('%d')
+                ->setFormTypeOptions([
+                    'constraints' => [
+                        new Length([
+                            'min' => 5,
+                            'max' => 5,
+                            'exactMessage' => 'Le code postal doit contenir exactement 5 chiffres.',
+                        ]),
+                    ]
+                ]),
             TextField::new('city', 'Ville')
                 ->setFormTypeOption('translation_domain', false),
             TextField::new('country', 'Pays')
                 ->setFormTypeOption('translation_domain', false),
             TelephoneField::new('tel', 'Téléphone')
-                ->setFormTypeOption('translation_domain', false),
+                ->setFormTypeOption('translation_domain', false)
+                ->setFormTypeOptions([
+                    'constraints' => [
+                        new Regex([
+                            'pattern' => '/^(\+33\s?|0)[1-9](\s?\d{2}){4}$/',
+                            'message' => 'Le numéro de téléphone doit être au format français (0102030405 ou +33 102030405, avec ou sans espaces).',
+                        ]),
+                    ]
+                ])
+            ,
             EmailField::new('mail', 'Email')
                 ->setFormTypeOption('translation_domain', false),
 
