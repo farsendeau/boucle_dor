@@ -114,12 +114,12 @@ a:hover {
     border-radius: 0;
 }
 
-/** surcharge dropdown menu */
-.dropdown-menu {
+.card-img, .card-img-top, .card-img-bottom {
     border-radius: 0 !important;
 }
 
-.card-img, .card-img-top, .card-img-bottom {
+/** surcharge dropdown menu */
+.dropdown-menu {
     border-radius: 0 !important;
 }
 
@@ -133,6 +133,11 @@ img.rounded {
 .dropdown-item:active {
     background-color: var(--color-background-2);
     color: white;
+}
+
+/** surcharge alerte */
+.alert {
+    border-radius: 0 !important;
 }
 
 /** Header */

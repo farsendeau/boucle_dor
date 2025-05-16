@@ -25,6 +25,7 @@ contact:
     submit: 'Envoyer'
     mail_send_success: 'Votre message a bien été envoyé'
 error_page:
+    error: 'Erreur'
     error_title: 'Oups ! Une erreur est survenue'
     error_p: 'Veuillez réessayer ultérieurement'
     error_400_title: 'Oups ! Page non trouvée'

@@ -25,6 +25,7 @@ contact:
     submit: 'Submit'
     mail_send_success: 'Your message has been sent successfully'
 error_page:
+    error: 'Error'
     error_title: 'Oops! An error has occurred'
     error_p: 'Please try again later'
     error_400_title: 'Oops! Page not found'
