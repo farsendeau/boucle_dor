@@ -2,8 +2,6 @@
     /* Palette de couleurs principale */
     --color-primary: #474329;        /* Couleur principale pour les titres */
     --color-text: #000000;           /* Couleur de texte standard */
-    --color-alert-red: #D52222;      /* Couleur pour les alertes rouges */
-    --color-alert-grey: #707070;     /* Couleur pour les alertes grises */
     --color-breadcrumb: #BCB893;     /* Couleur pour le fil d'Ariane */
     --color-menu: #FFFFFF;           /* Couleur du texte du menu */
     --color-site-name: #FFFFFF;
@@ -16,7 +14,9 @@
     --color-link-hover: #474329;     /* Couleur des liens au survol */
 
     /* Couleurs pour des composants spécifiques */
-    --navbar-bg: #474329;            /* Couleur de fond de la navbar */
+    --color-navbar-bg: #474329;            /* Couleur de fond de la navbar */
+    --color-alert-success: #dcdac7;
+    --color-alert-danger: #bc6161;      /* Couleur pour les alertes rouges */
 }
 
 /* Titres */
@@ -38,7 +38,7 @@ h2 {
 p {
     font-family: 'darkmode-on', sans-serif;
     font-weight: 400; /* Regular */
-    font-size: 1.67rem; /* 20pt → 1.67rem (20pt ÷ 12pt = 1.67) */
+    font-size: 1rem;
     color: var(--color-text);
 }
 
@@ -57,12 +57,16 @@ h3, .liste-puce {
     font-size: 1rem; /* 12pt → 1rem (12pt ÷ 12pt = 1) */
 }
 
-.alerte-rouge {
-    color: var(--color-alert-red);
+.alert-danger {
+    background-color:  var(--color-alert-danger) !important;
+    border-color:  var(--color-alert-danger) !important;
+    color: #fff !important; /* Pour assurer la lisibilité */
 }
 
-.alerte-gris {
-    color: var(--color-alert-grey);
+.alert-success {
+    background-color: var(--color-alert-success) !important;
+    border-color: var(--color-alert-success) !important;
+    color: #000 !important; /* Pour assurer la lisibilité */
 }
 
 /* Fil d'Ariane */
@@ -104,6 +108,7 @@ a:hover {
 
 .btn {
     border-radius: 0;
+    font-family: "darkmode-on", sans-serif;
 }
 
 /** surcharge des cards */
@@ -197,6 +202,7 @@ nav[aria-label="breadcrumb"] {
 label, label + span {
     color: var(--color-background-2);
     font-weight: 500;
+    font-family: "darkmode-on", sans-serif;
 }
 
 footer {

@@ -11,7 +11,7 @@
                 {% endif %}
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <div class="alert alert-info mb-3">
+                    <div class="mb-3">
                         {{ 'login.logged_as'|trans({'{{ user }}': app.user.userIdentifier}) }}, <a href="{{ path('app_logout') }}">{{ 'login.logout'|trans() }}</a>
                     </div>
                 {% else %}

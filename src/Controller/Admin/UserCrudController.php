@@ -56,7 +56,7 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $resetPassword = Action::new('resetPassword', 'Reset MDP')
+        $resetPassword = Action::new('resetPassword', 'Créer MDP')
             ->linkToRoute('app_forgot_password_request', static function (User $entity) {
                 return [
                     'email' => $entity->getEmail(),

@@ -1,1 +1,3 @@
 tel.invalid: 'Le numéro saisi est invalide'
+The password fields must match.: 'Les champs de mot de passe doivent correspondre.'
+Your password should be at least {{ limit }} characters: 'Votre mot de passe doit contenir au moins {{ limit }} caractères.'
