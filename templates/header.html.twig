@@ -3,7 +3,7 @@
         <div class="container">
             {# Titre à gauche #}
             <a class="navbar-brand site-name" href="{{ path('home_index') }}">
-               {{ siteGetInfo('name') }}
+               <h1>{{ siteGetInfo('name')|title }}</h1>
             </a>
 
             {# Bouton hamburger pour mobile #}

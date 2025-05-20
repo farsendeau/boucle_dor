@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\ByteString;
@@ -23,6 +24,7 @@ class UserCrudController extends AbstractCrudController
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly Security $security,
     ){
     }
 
@@ -56,12 +58,21 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+
         $resetPassword = Action::new('resetPassword', 'Créer MDP')
             ->linkToRoute('app_forgot_password_request', static function (User $entity) {
                 return [
                     'email' => $entity->getEmail(),
                 ];
+            })
+        ;
+
+        $actions->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+            return $action->displayIf(function (User $entity) {
+               $currentUser = $this->security->getUser();
+               return $currentUser->getUserIdentifier() !== $entity->getUserIdentifier();
             });
+        });
 
         $actions->add(Crud::PAGE_INDEX, $resetPassword);
 

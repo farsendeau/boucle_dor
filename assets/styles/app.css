@@ -22,9 +22,8 @@
 /* Titres */
 h1 {
     font-family: "ivymode", serif;
-    font-weight: 600; /* SemiBold */
-    font-size: 3.75rem; /* 45pt → 3.75rem (45pt ÷ 12pt = 3.75) */
-    color: var(--color-primary);
+    font-size: 2rem; /* 45pt → 3.75rem (45pt ÷ 12pt = 3.75) */
+    color: var(--color-site-name);
 }
 
 h2 {
@@ -43,7 +42,13 @@ p {
 }
 
 /* Listes à puces (H3) */
-h3, .liste-puce {
+h3 {
+    font-family: "ivymode", serif;
+    color: #474329;
+    font-size: 2.5rem;
+}
+
+.liste-puce {
     font-family: 'darkmode-on', sans-serif;
     font-weight: 700; /* Bold */
     font-size: 1.67rem; /* 20pt → 1.67rem (20pt ÷ 12pt = 1.67) */
@@ -99,16 +104,17 @@ a:hover {
 .btn-primary {
     --bs-btn-bg: var(--color-background-2);
     --bs-btn-border-color: var(--color-background-2);
-    --bs-btn-hover-bg: var(--color-alert-grey); /* Couleur plus foncée pour le hover */
-    --bs-btn-hover-border-color: var(--color-alert-grey);
-    --bs-btn-active-bg: var(--color-alert-grey);
-    --bs-btn-active-border-color: var(--color-alert-grey);
+    --bs-btn-hover-bg: var(--color-link-hover); /* Couleur plus foncée pour le hover */
+    --bs-btn-hover-border-color: var(--color-link-hover);
+    --bs-btn-active-bg: var(--color-background-2);;
+    --bs-btn-active-border-color: var(--color-background-2);
     font-weight: 500;
 }
 
 .btn {
     border-radius: 0;
     font-family: "darkmode-on", sans-serif;
+    text-transform: uppercase;
 }
 
 /** surcharge des cards */

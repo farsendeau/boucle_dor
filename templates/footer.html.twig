@@ -4,7 +4,7 @@
             <!-- Colonne d'adresse -->
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <address itemscope itemtype="http://schema.org/LocalBusiness">
-                    <h5 itemprop="name">{{ siteGetInfo('name') }}</h5>
+                    <h5 itemprop="name">{{ siteGetInfo('name')|title }}</h5>
                     <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                         <p class="mb-0"><span itemprop="streetAddress">{{ siteGetInfo('address') }}</span></p>
                         <p class="mb-0"><span itemprop="postalCode">{{ siteGetInfo('codePostal') }}</span> <span itemprop="addressLocality">{{ siteGetInfo('city') }}</span></p>
@@ -82,7 +82,7 @@
     <!-- Copyright -->
     <div class="row footer-end">
         <div class="col-12 text-center">
-            <p class="mb-0">© {{ "now"|date("Y") }} {{ siteGetInfo('name') }}. {{ 'home.all_rights_reserved'|trans }}.</p>
+            <p class="mb-0">© {{ "now"|date("Y") }} {{ siteGetInfo('name')|title }}. {{ 'home.all_rights_reserved'|trans }}.</p>
         </div>
     </div>
 </footer>

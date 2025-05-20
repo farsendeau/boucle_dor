@@ -15,7 +15,7 @@
                         </div>
                         <h3 class="mb-3 fw-bold alerte-rouge">{{ 'error_page.error_title'|trans }}</h3>
                         <p class="mb-4">{{ 'error_page.error_p'|trans }}</p>
-                        <a href="{{ path('home_index') }}" class="btn btn-primary px-4 py-2">{{ 'home.home'|trans([], null, app.locale)|default('Retour à l\'accueil') }}</a>
+                        <a href="{{ path('home_index') }}" class="btn btn-primary px-4 py-2">{{ 'home.home'|trans([], null, app.locale)|default('Retour à l\'accueil')|upper }}</a>
                     </div>
                 </div>
             </div>
