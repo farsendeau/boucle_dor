@@ -7,6 +7,7 @@ use App\Entity\Site\Site;
 use App\Entity\User;
 use App\Repository\Site\SiteRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -71,5 +72,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Pages légales', null, LegalPage::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addHtmlContentToHead('<style>.trix-button--icon-code { display: none !important; }</style>');
     }
 }

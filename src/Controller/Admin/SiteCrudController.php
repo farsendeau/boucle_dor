@@ -71,7 +71,7 @@ class SiteCrudController extends AbstractCrudController
                         new Length([
                             'min' => 5,
                             'max' => 5,
-                            'exactMessage' => 'Le code postal doit contenir exactement 5 chiffres.',
+                            'exactMessage' => 'Le code postal doit contenir 5 chiffres.',
                         ]),
                     ]
                 ]),
