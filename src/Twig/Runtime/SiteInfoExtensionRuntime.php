@@ -26,14 +26,14 @@ readonly class SiteInfoExtensionRuntime implements RuntimeExtensionInterface
         $site = $this->cache->get('site', function () {
             $site = $this->siteRepository->findOneBy([]);
             // Forcer le chargement des relations
-            $site->getLinks()->initialize();
+            $site?->getLinks()->initialize();
+
             return $site;
         });
 
         if (!$site) {
             return null;
         }
-
 
         if ('mapLocalization' === $value) {
             return [

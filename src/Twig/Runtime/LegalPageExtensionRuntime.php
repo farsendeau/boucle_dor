@@ -22,6 +22,9 @@ readonly class LegalPageExtensionRuntime implements RuntimeExtensionInterface
     public function isDefined(string $value, string $locale): bool
     {
         $legalPage = $this->cache->get('legal_page', fn () => $this->legalContentRepository->findOneBy([]));
+        if (!$legalPage) {
+            return false;
+        }
 
         $methodTitle = sprintf('get%sTitle%s', ucfirst($value), ucfirst($locale));
         $methodContent = sprintf('get%sContent%s', ucfirst($value), ucfirst($locale));
@@ -42,6 +45,6 @@ readonly class LegalPageExtensionRuntime implements RuntimeExtensionInterface
             return null;
         }
 
-        return $method->$method();
+        return $legalPage->$method();
     }
 }

@@ -65,7 +65,7 @@
             <!-- Troisième colonne avec la carte -->
             <div class="col-lg-4">
                 {% set mapLocalisation = siteGetInfo('mapLocalization') %}
-                {% if mapLocalisation.site and mapLocalisation.map_url %}
+                {% if mapLocalisation is not null and mapLocalisation.site and mapLocalisation.map_url %}
                     <h5 class="mb-3">{{ 'home.find_us'|trans }}</h5>
                     <div class="map-container" itemprop="hasMap">
                         <a href="{{ mapLocalisation.map_url }}" target="_blank" rel="noopener" aria-label="Voir notre localisation">
