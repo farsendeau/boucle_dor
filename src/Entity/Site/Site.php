@@ -25,7 +25,7 @@ class Site
     private ?string $address = '';
 
     #[ORM\Column(length: 8)]
-    private ?string $codePostal = '';
+    private ?string $codePostal = null;
 
     #[ORM\Column(length: 32)]
     private ?string $city = '';

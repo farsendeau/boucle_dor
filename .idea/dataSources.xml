@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="f28dc703-477e-48ea-b1fa-8a5ed073f04d">
+    <data-source source="LOCAL" name="boucle_dor" uuid="f28dc703-477e-48ea-b1fa-8a5ed073f04d">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:50655</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:49300/boucle_dor</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
