@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h1 style="color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 10px;">Nouvelle demande de réservation</h1>
+
+        <p>Vous avez reçu une nouvelle demande de réservation pour <strong>{{ booking.giteName }}</strong> :</p>
+
+        <!-- Informations du client -->
+        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #2c3e50;">Informations client</h3>
+            <div style="margin-bottom: 10px;"><span style="font-weight: bold; color: #555;">Nom :</span> {{ booking.lastname }}</div>
+            <div style="margin-bottom: 10px;"><span style="font-weight: bold; color: #555;">Prénom :</span> {{ booking.firstname }}</div>
+            <div style="margin-bottom: 10px;"><span style="font-weight: bold; color: #555;">Email :</span> <a href="mailto:{{ booking.mail }}" style="color: #3498db;">{{ booking.mail }}</a></div>
+        </div>
+
+        <!-- Détails de la réservation -->
+        <div style="background-color: #e8f4fd; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #3498db;">
+            <h3 style="margin-top: 0; color: #2c3e50;">Détails de la réservation</h3>
+
+            <div style="margin-bottom: 15px;">
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Gîte :</span> {{ booking.giteName }}</div>
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Date d'arrivée :</span> {{ booking.dateArrival|date('d/m/Y') }}</div>
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Date de départ :</span> {{ booking.dateDeparture|date('d/m/Y') }}</div>
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Durée du séjour :</span>
+                    {% set nights = (booking.dateDeparture.timestamp - booking.dateArrival.timestamp) / (60*60*24) %}
+                    {{ nights|round }} nuitée{{ nights > 1 ? 's' : '' }}
+                </div>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Nombre d'adultes :</span> {{ booking.nbAdult }}</div>
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Nombre d'enfants :</span> {{ booking.nbChild }}</div>
+                <div style="margin-bottom: 5px;"><span style="font-weight: bold; color: #555;">Total voyageurs :</span> {{ booking.nbAdult + booking.nbChild }} personne{{ (booking.nbAdult + booking.nbChild) > 1 ? 's' : '' }}</div>
+            </div>
+
+            <!-- Prix du séjour -->
+{#            <div style="background-color: #fff; padding: 10px; border-radius: 3px; border: 1px solid #ddd;">#}
+{#                <div style="margin-bottom: 5px;">#}
+{#                    <span style="font-weight: bold; color: #555;">Prix total du séjour :</span>#}
+{#                    <span style="font-size: 18px; font-weight: bold; color: #27ae60;">{{ booking.price }} €</span>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+
+        <!-- Récapitulatif -->
+        <div style="background-color: #f0f8f0; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #27ae60;">
+            <h3 style="margin-top: 0; color: #2c3e50;">Récapitulatif</h3>
+            <p style="margin-bottom: 10px;">
+                <strong>{{ booking.firstname }} {{ booking.lastname }}</strong> souhaite réserver le gîte
+                <strong>{{ booking.giteName }}</strong> du <strong>{{ booking.dateArrival|date('d/m/Y') }}</strong>
+                au <strong>{{ booking.dateDeparture|date('d/m/Y') }}</strong>
+                pour <strong>{{ booking.nbAdult }} adulte{{ booking.nbAdult > 1 ? 's' : '' }}</strong>
+                {% if booking.nbChild > 0 %}
+                et <strong>{{ booking.nbChild }} enfant{{ booking.nbChild > 1 ? 's' : '' }}</strong>
+                {% endif %}.
+            </p>
+{#            <p style="margin-bottom: 0; font-size: 16px;">#}
+{#                <strong>Prix total : {{ booking.price }} €</strong>#}
+{#            </p>#}
+        </div>
+
+        <!-- Actions -->
+        <div style="text-align: center; margin: 30px 0;">
+            <p style="color: #7f8c8d; font-style: italic;">
+                Pensez à répondre rapidement à cette demande de réservation.
+            </p>
+            <a href="mailto:{{ booking.mail }}?subject=Réponse à votre demande de réservation - {{ booking.giteName }}"
+               style="background-color: #3498db; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;">
+                Répondre au client
+            </a>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+        <p style="font-size: 12px; color: #999; text-align: center;">
+            Cette demande de réservation a été envoyée automatiquement depuis votre site web.
+        </p>
+    </div>
+</div>
+</body>
+</html>

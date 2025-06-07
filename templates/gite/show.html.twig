@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}{{ gite.name|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {% import 'macro/breadcrumb.html.twig' as breadcrumb %}
+    {{ breadcrumb.render([
+        {
+            name: 'gite.gites',
+            route: 'gite_index'
+        },
+        {
+            name: gite.name,
+            route: 'gite_show',
+            params: {'slug': gite.slug}
+        }
+    ]) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('styles/gite.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="bg-gite-image w-100"
+         data-image="{{ vich_uploader_asset(gite, 'backgroundImage') }}"
+         style="--bg-image: url('{{ vich_uploader_asset(gite, 'backgroundImage') }}');">
+        <h2 class="gite-name">{{ gite.name|title }}</h2>
+    </div>
+
+    <div class="mt-n5 position-relative container">
+        <div class="row mb-4">
+            <div class="row g-4">
+                <!-- Colonne de gauche : Informations du gîte -->
+                <div class="col-lg-8">
+                    <!-- Section principale -->
+                    <div class="mb-5">
+                        <h2 class="mb-3">{{ gite.title }}</h2>
+                        <p class="mb-4">{{ gite.summary }}</p>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-3">Description</h3>
+                        <div class="text-muted">
+                            {{ gite.description|nl2br }}
+                        </div>
+                    </div>
+
+                    <!-- Équipements -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-4">{{ 'gite.equipment'|trans }}</h3>
+                        <div class="equipment-list">
+                            {% for equipment in gite.equipments %}
+                                <div class="equipment-item d-flex align-items-start mb-3">
+                                    <div class="flex-shrink-0 me-3">
+                                        <img src="{{ vich_uploader_asset(equipment, 'picto') }}"
+                                             alt="{{ equipment.name }}"
+                                             width="32"
+                                             height="32"
+                                             class="equipment-icon">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="equipment-title mb-1">{{ equipment.name }}</p>
+                                        <p class="equipment-description mb-0 text-muted">{{ equipment.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne de droite : Formulaire de réservation -->
+                <div class="col-lg-4" data-controller="gite" data-gite-price-night-value="{{ gite.price }}">
+                    <div class="reservation border-end border-bottom shadow-sm pe-3 pb-3">
+                        <div class="card">
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                        {{ message|trans }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                            <div class="text-center py-3">
+                                <h4 class="mb-0 reservation-color">{{ 'gite.booking_request'|trans }}</h4>
+                            </div>
+                            <div class="p-4">
+                                {{ form_start(form, {'attr': {'class': 'reservation-form'}}) }}
+
+                                <!-- Dates -->
+                                <div class="row g-2 mb-4">
+                                    <div class="col-6">
+                                        {{ form_row(form.dateArrival, {'attr': {
+                                            'data-action': 'change->gite#updateDateRecap',
+                                            'data-gite-target': 'dateArrival',
+                                        }}) }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form_row(form.dateDeparture, {'attr': {
+                                            'data-action': 'change->gite#updateDateRecap',
+                                            'data-gite-target': 'dateDeparture'
+                                        }}) }}
+                                    </div>
+                                </div>
+
+                                <!-- Nombre de voyageurs -->
+                                <div class="mb-4">
+                                    <p class="text-uppercase reservation-color mb-3">{{ 'gite.nb_traveller'|trans }}</p>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            {{ form_row(form.nbAdult, {'attr': {
+                                                'min': 1,
+                                                'data-action': 'change->gite#updatePersonRecap',
+                                                'data-gite-target': 'personAdult'
+                                            }}) }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ form_row(form.nbChild, {'attr': {
+                                                'min': 0,
+                                                'data-action': 'change->gite#updatePersonRecap',
+                                                'data-gite-target': 'personChild'
+                                            }}) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Informations personnelles -->
+                                <div class="mb-4">
+                                    <p class="text-uppercase reservation-color mb-3">{{ 'gite.your_info'|trans }}</p>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            {{ form_row(form.lastname) }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ form_row(form.firstname) }}
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        {{ form_row(form.mail) }}
+                                    </div>
+                                </div>
+
+                                <!-- Récapitulatif -->
+                                <div class="p-3 mb-4">
+                                    <p class="text-uppercase reservation-color mb-3">{{ 'gite.recap'|trans }}</p>
+                                    <div class="small text-muted">
+                                        <p class="mb-2">
+                                            {{ 'gite.from'|trans }} <span data-gite-target="recapArrival" class="fw-bold">--/--/----</span>
+                                            {{ 'gite.to'|trans }} <span data-gite-target="recapDeparture" class="fw-bold">--/--/----</span>
+                                        </p>
+                                        <p class="mb-2">
+                                            {{ 'gite.recap_nights_prefix'|trans }} <span data-gite-target="recapNight" class="fw-bold">-</span> {{ 'gite.recap_nights_suffix'|trans }}
+                                            {{ 'gite.recap_adults_prefix'|trans }} <span data-gite-target="recapPersonAdult" class="fw-bold">-</span> {{ 'gite.recap_adults_suffix'|trans }}
+                                            {{ 'gite.recap_children_prefix'|trans }} <span data-gite-target="recapPersonChild" class="fw-bold">0</span> {{ 'gite.recap_children_suffix'|trans }}
+                                        </p>
+                                        <div class="border-top pt-2 mt-3">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="fw-bold">{{ 'gite.total'|trans }} :</span>
+                                                <span
+                                                    class="fw-bold"
+                                                    data-gite-target="recapPrice"
+                                                >--- €**</span>
+                                            </div>
+                                            <small class="text-muted d-block mt-1">
+                                                ** {{ 'gite.disclaimer'|trans }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bouton de soumission -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ 'contact.submit'|trans|upper }}
+                                    </button>
+                                </div>
+
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Gite\Gite;
 use App\Entity\Site\LegalPage;
 use App\Entity\Site\Site;
 use App\Entity\User;
@@ -63,6 +64,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::section('Admin', 'fa fa-tools');
         yield MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home_index');
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer');
         yield MenuItem::linkToCrud('Utilisateur Admin', 'fa fa-list', User::class);
@@ -71,6 +73,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Configuration du site', null, Site::class);
         yield MenuItem::linkToCrud('Pages légales', null, LegalPage::class);
 
+        yield MenuItem::section('Gîte', 'fa fa-bed');
+        yield MenuItem::linkToCrud('Gestion des Gîtes', null, Gite::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 

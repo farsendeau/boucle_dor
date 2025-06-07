@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\DTO\Contact;
-use App\Form\ContactType;
+use App\Form\ContactFormType;
 use App\Repository\Site\SiteRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +25,7 @@ final class ContactController extends AbstractController
     public function index(Request $request, MailerInterface $mailer): Response
     {
         $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        $form = $this->createForm(ContactFormType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

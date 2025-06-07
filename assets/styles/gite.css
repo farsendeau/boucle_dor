@@ -1,0 +1,29 @@
+.bg-gite-image {
+    height: 60vh;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2.gite-name {
+    font-family: "ivymode", serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #FFFFFF;
+    margin: 0; /* Supprime les marges par défaut du h2 */
+}
+
+.equipment-list .equipment-item .equipment-icon {
+    filter: brightness(0) saturate(100%);
+}
+
+.equipment-list .equipment-item .equipment-title {
+    color: var(--color-background-2);
+}
+
+.reservation .reservation-color {
+    color: var(--color-background-2);
+}

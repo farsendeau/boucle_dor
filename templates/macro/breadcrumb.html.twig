@@ -19,7 +19,7 @@
                                 <span itemprop="name">{{ name|trans }}</span>
                             </a>
                         {% else %}
-                            <span itemprop="name">{{ name|trans }}</span>
+                            <span itemprop="name">{{ name|trans|capitalize }}</span>
                             <meta itemprop="item" content="{{ path(route, params) }}" />
                         {% endif %}
                         <meta itemprop="position" content="{{ loop.index + 1 }}" />

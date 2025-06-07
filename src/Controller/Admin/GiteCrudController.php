@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Entity\Gite\Gite;
+use App\Form\EquipmentFormType;
+use App\Form\LinkFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
+#[IsGranted('ROLE_ADMIN')]
+class GiteCrudController extends AbstractCrudController
+{
+    public static function getEntityFqcn(): string
+    {
+        return Gite::class;
+    }
+
+
+    public function configureFields(string $pageName): iterable
+    {
+        $fields =  [
+            TextField::new('name', 'Nom')
+                ->setFormTypeOption('translation_domain', false),
+            TextField::new('title', 'titre')
+                ->setFormTypeOption('translation_domain', false),
+            TextField::new('summary', 'Résumé')
+                ->setFormTypeOption('translation_domain', false),
+            TextareaField::new('description', 'Description')
+                ->setFormTypeOption('translation_domain', false),
+            IntegerField::new('price', 'Prix de la nuitée')
+                ->setFormTypeOption('translation_domain', false),
+            TextField::new('backgroundImage', 'Image de fond')
+                ->setFormType(VichImageType::class)
+                ->setFormTypeOptions([
+                    'required' => true,
+                    'allow_delete' => true,
+                    'download_uri' => false,
+                    'image_uri' => true,
+                    'asset_helper' => true,
+                ])
+                ->onlyOnForms()
+        ];
+
+        $fields[] = CollectionField::new('equipments', 'Equipements')
+            ->setEntryType(EquipmentFormType::class)
+            ->setFormTypeOptions([
+                'by_reference' => false,
+                'translation_domain' => false,
+            ])
+            ->allowAdd()
+            ->allowDelete()
+            ->onlyOnForms();
+
+        return $fields;
+    }
+}
