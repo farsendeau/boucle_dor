@@ -2,7 +2,9 @@
 
 namespace App\Entity\Site;
 
+use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Site\SiteRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Site
 {
+    use UpdatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -141,6 +144,8 @@ class Site
     public function setMapImage(?File $mapImage): static
     {
         $this->mapImage = $mapImage;
+
+        $this->setUpdatedAt(new DateTime());
 
         return $this;
     }

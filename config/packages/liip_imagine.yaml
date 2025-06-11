@@ -2,5 +2,68 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
-    twig:
-        mode: lazy
+    
+    # Configuration des résolveurs pour le cache
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "media/cache"
+
+    # Configuration des loaders (où trouver les images originales)
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.project_dir%/public"
+
+    # Définition des filtres pour les différentes tailles
+    filter_sets:
+        # Miniature carrée pour les listes/galeries
+        thumbnail:
+            quality: 85
+            filters:
+                thumbnail:
+                    size: [150, 150]
+                    mode: outbound
+                    allow_upscale: false
+                strip: ~
+        
+        # Miniature rectangulaire plus grande
+        thumbnail_large:
+            quality: 90
+            filters:
+                thumbnail:
+                    size: [300, 200]
+                    mode: outbound
+                    allow_upscale: false
+                strip: ~
+        
+        # Taille moyenne pour aperçus
+        medium:
+            quality: 90
+            filters:
+                thumbnail:
+                    size: [500, 500]
+                    mode: inset
+                    allow_upscale: false
+                strip: ~
+        
+        # Grande taille pour l'affichage détaillé
+        large:
+            quality: 95
+            filters:
+                thumbnail:
+                    size: [1000, 1000]
+                    mode: inset
+                    allow_upscale: false
+                strip: ~
+        
+        # Version optimisée pour le web (compression)
+        web_optimized:
+            quality: 80
+            filters:
+                thumbnail:
+                    size: [800, 600]
+                    mode: inset
+                    allow_upscale: false
+                strip: ~

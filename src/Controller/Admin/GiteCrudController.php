@@ -4,14 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\Gite\Gite;
 use App\Form\EquipmentFormType;
-use App\Form\LinkFormType;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 #[IsGranted('ROLE_ADMIN')]
@@ -39,11 +38,12 @@ class GiteCrudController extends AbstractCrudController
             TextField::new('backgroundImage', 'Image de fond')
                 ->setFormType(VichImageType::class)
                 ->setFormTypeOptions([
-                    'required' => true,
+                    'required' => false,
                     'allow_delete' => true,
                     'download_uri' => false,
                     'image_uri' => true,
                     'asset_helper' => true,
+                    'constraints' => [new NotNull(['groups' => ['create']])]
                 ])
                 ->onlyOnForms()
         ];

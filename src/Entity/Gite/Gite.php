@@ -2,7 +2,11 @@
 
 namespace App\Entity\Gite;
 
+use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Gite\GiteRepository;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -15,6 +19,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Gite
 {
+    use UpdatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -129,6 +135,8 @@ class Gite
     public function setBackgroundImage(?File $backgroundImage): static
     {
         $this->backgroundImage = $backgroundImage;
+
+        $this->setUpdatedAt(new DateTimeImmutable());
 
         return $this;
     }

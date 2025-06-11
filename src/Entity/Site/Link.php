@@ -2,7 +2,9 @@
 
 namespace App\Entity\Site;
 
+use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Site\LinkRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -11,6 +13,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Link
 {
+    use UpdatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -69,6 +73,8 @@ class Link
     public function setPicto(?File $picto): static
     {
         $this->picto = $picto;
+
+        $this->setUpdatedAt(new DateTime());
 
         return $this;
     }

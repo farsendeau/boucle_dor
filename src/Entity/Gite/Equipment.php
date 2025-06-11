@@ -2,7 +2,10 @@
 
 namespace App\Entity\Gite;
 
+use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Gite\EquipmentRepository;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -11,6 +14,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class Equipment
 {
+    use UpdatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -66,9 +71,11 @@ class Equipment
         return $this->picto;
     }
 
-    public function setPicto(?File $picto): void
+    public function setPicto(?File $picto): static
     {
         $this->picto = $picto;
+
+        return $this;
     }
 
     public function getPictoName(): ?string
@@ -76,9 +83,11 @@ class Equipment
         return $this->pictoName;
     }
 
-    public function setPictoName(?string $pictoName): void
+    public function setPictoName(?string $pictoName): static
     {
         $this->pictoName = $pictoName;
+
+        return $this;
     }
 
     public function getGite(): ?Gite
