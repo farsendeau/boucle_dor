@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 trait UpdatedAtTrait
 {
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     #[Gedmo\Timestampable]
     public ?DateTimeImmutable $updatedAt = null;
 

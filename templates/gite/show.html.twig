@@ -186,4 +186,42 @@
             </div>
         </div>
     </div>
+
+
+    <div class="mt-n5 mb-5 position-relative container">
+        {% set imageBatch = gite.giteImages|slice(0, 5) %}
+
+        {% if imageBatch|length == 5 %}
+            {% set images = gite.giteImages %}
+            {% set mainImage = images[0] %}
+            {% set gridImages = images|slice(1, 4) %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col-md-6">
+                    <img src="{{ vich_uploader_asset(mainImage, 'image')|imagine_filter('large') }}" class="card-img-top" alt="{{ mainImage.name }}">
+                </div>
+
+                <div class="col-md-6">
+                    {% for imageBatch in gridImages|batch(2) %}
+                        <div class="row">
+                            {% for image in imageBatch %}
+                                <div class="col mb-4">
+                                    <img src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}" class="card-img-top" alt="{{ image.name }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for image in imageBatch %}
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}" class="card-img-top" alt="...">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

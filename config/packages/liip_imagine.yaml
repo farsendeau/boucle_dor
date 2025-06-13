@@ -18,6 +18,8 @@ liip_imagine:
 
     # Définition des filtres pour les différentes tailles
     filter_sets:
+        
+        cache: ~
         # Miniature carrée pour les listes/galeries
         thumbnail:
             quality: 85

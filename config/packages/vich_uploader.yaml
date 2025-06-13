@@ -17,6 +17,10 @@ vich_uploader:
             uri_prefix: /images/gite/equipment
             upload_destination: '%kernel.project_dir%/public/images/gite/equipment'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        gite_images:
+            uri_prefix: /images/gite/image
+            upload_destination: '%kernel.project_dir%/public/images/gite/image'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer    
     #mappings:
     #    products:
     #        uri_prefix: /images/products

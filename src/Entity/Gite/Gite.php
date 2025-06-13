@@ -4,9 +4,7 @@ namespace App\Entity\Gite;
 
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Gite\GiteRepository;
-use DateTime;
 use DateTimeImmutable;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -57,9 +55,16 @@ class Gite
     #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'gite', cascade: ['persist', 'remove'] ,orphanRemoval: true)]
     private Collection $equipments;
 
+    /**
+     * @var Collection<int, GiteImage>
+     */
+    #[ORM\OneToMany(targetEntity: GiteImage::class, mappedBy: 'gite', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $giteImages;
+
     public function __construct()
     {
         $this->equipments = new ArrayCollection();
+        $this->giteImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,6 +194,36 @@ class Gite
             // set the owning side to null (unless already changed)
             if ($equipment->getGite() === $this) {
                 $equipment->setGite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GiteImage>
+     */
+    public function getGiteImages(): Collection
+    {
+        return $this->giteImages;
+    }
+
+    public function addGiteImage(GiteImage $giteImage): static
+    {
+        if (!$this->giteImages->contains($giteImage)) {
+            $this->giteImages->add($giteImage);
+            $giteImage->setGite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGiteImage(GiteImage $giteImage): static
+    {
+        if ($this->giteImages->removeElement($giteImage)) {
+            // set the owning side to null (unless already changed)
+            if ($giteImage->getGite() === $this) {
+                $giteImage->setGite(null);
             }
         }
 

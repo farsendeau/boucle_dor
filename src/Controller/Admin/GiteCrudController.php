@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Gite\Gite;
 use App\Form\EquipmentFormType;
+use App\Form\GiteImageFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -50,6 +51,16 @@ class GiteCrudController extends AbstractCrudController
 
         $fields[] = CollectionField::new('equipments', 'Equipements')
             ->setEntryType(EquipmentFormType::class)
+            ->setFormTypeOptions([
+                'by_reference' => false,
+                'translation_domain' => false,
+            ])
+            ->allowAdd()
+            ->allowDelete()
+            ->onlyOnForms();
+
+        $fields[] = CollectionField::new('giteImages', 'Images du gîte')
+            ->setEntryType(GiteImageFormType::class)
             ->setFormTypeOptions([
                 'by_reference' => false,
                 'translation_domain' => false,
