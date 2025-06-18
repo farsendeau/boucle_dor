@@ -4,7 +4,7 @@ namespace App\Entity\Site;
 
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Site\SiteRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -145,7 +145,7 @@ class Site
     {
         $this->mapImage = $mapImage;
 
-        $this->setUpdatedAt(new DateTime());
+        $this->setUpdatedAt(new DateTimeImmutable());
 
         return $this;
     }

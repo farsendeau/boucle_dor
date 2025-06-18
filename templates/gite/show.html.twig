@@ -187,29 +187,50 @@
         </div>
     </div>
 
-
-    <div class="mt-n5 mb-5 position-relative container">
+    {% set imagesData = [] %}
+        {% for image in gite.giteImages %}
+            {% set imagesData = imagesData|merge([{
+            'src': vich_uploader_asset(image, 'image')|imagine_filter('extra_large'),
+            'alt': image.name,
+            'thumbnail': vich_uploader_asset(image, 'image')|imagine_filter('thumbnail')
+        }]) %}
+    {% endfor %}
+    <div class="mt-n5 mb-5 position-relative container" data-controller="lightbox" data-lightbox-images-value="{{ imagesData|json_encode|e('html_attr') }}" data-lightbox-current-index-value="0">
         {% set imageBatch = gite.giteImages|slice(0, 5) %}
 
         {% if imageBatch|length == 5 %}
             {% set images = gite.giteImages %}
             {% set mainImage = images[0] %}
             {% set gridImages = images|slice(1, 4) %}
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col-md-6">
-                    <img src="{{ vich_uploader_asset(mainImage, 'image')|imagine_filter('large') }}" class="card-img-top" alt="{{ mainImage.name }}">
+            <div class="row g-3" style="height: 400px;">
+                <!-- Grande image principale -->
+                <div class="col-md-6 h-100">
+                    <div class="position-relative h-100 overflow-hidden shadow-sm">
+                        <img
+                            role="button"
+                            data-action="click->lightbox#open"
+                            data-lightbox-index-param="0"
+                            src="{{ vich_uploader_asset(mainImage, 'image')|imagine_filter('large') }}"
+                            class="w-100 h-100 object-fit-cover hover-scale"
+                            alt="{{ mainImage.name }}">
+                    </div>
                 </div>
 
-                <div class="col-md-6">
-                    {% for imageBatch in gridImages|batch(2) %}
-                        <div class="row">
-                            {% for image in imageBatch %}
-                                <div class="col mb-4">
-                                    <img src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}" class="card-img-top" alt="{{ image.name }}">
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
+                <!-- Grille 2x2 d'images -->
+                <div class="col-md-6 h-100">
+                    <div class="grid-2x2 h-100">
+                        {% for image in gridImages %}
+                            <div class="grid-item position-relative overflow-hidden shadow-sm">
+                                <img
+                                    role="button"
+                                    data-action="click->lightbox#open"
+                                    data-lightbox-index-param="{{ loop.index }}"
+                                    src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}"
+                                    class="w-100 h-100 object-fit-cover hover-scale"
+                                    alt="{{ image.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         {% else %}
@@ -217,11 +238,60 @@
                 {% for image in imageBatch %}
                     <div class="col">
                         <div class="card">
-                            <img src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}" class="card-img-top" alt="...">
+                            <img
+                                role="button"
+                                data-index="{{ loop.index }}"
+                                data-gite-image-src-value="{{ vich_uploader_asset(image, 'image') }}"
+                                src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}" class="card-img-top" alt="{{ image.name }}">
                         </div>
                     </div>
                 {% endfor %}
             </div>
         {% endif %}
+
+        <div>
+            <div class="modal fade" tabindex="-1" aria-hidden="true" data-lightbox-target="modal">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content bg-dark">
+                        <!-- Header avec compteur et fermer -->
+                        <div class="modal-header border-0 position-absolute top-0 end-0 z-3">
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-dark bg-opacity-75 fs-6 me-3"
+                                      data-lightbox-target="counter">
+                                    1 / {{ gite.giteImages|length }}
+                                </span>
+                                <button type="button" class="btn-close btn-close-white"
+                                        data-action="lightbox#close">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="modal-body p-0 d-flex align-items-center justify-content-center position-relative">
+                            <img
+                                data-lightbox-target="currentImage"
+                                class="img-fluid"
+                                style="max-height: 90vh; max-width: 90vw; object-fit: contain;">
+
+                            <!-- Bouton précédent -->
+                            <button class="btn btn-light btn-lg position-absolute start-0 top-50 translate-middle-y ms-3 rounded-circle"
+                                    data-action="lightbox#previous"
+                                    data-lightbox-target="prevBtn"
+                                    style="width: 60px; height: 60px; opacity: 0.8;">
+                                <i class="fa-classic fa-solid fa-arrow-left fa-fw"></i>
+                            </button>
+
+                            <!-- Bouton suivant -->
+                            <button class="btn btn-light btn-lg position-absolute end-0 top-50 translate-middle-y me-3 rounded-circle"
+                                    data-action="click->lightbox#next"
+                                    data-lightbox-target="nextBtn"
+                                    style="width: 60px; height: 60px; opacity: 0.8;">
+                                <i class="fa-classic fa-solid fa-arrow-right fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

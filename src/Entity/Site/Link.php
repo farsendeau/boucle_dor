@@ -4,7 +4,7 @@ namespace App\Entity\Site;
 
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Site\LinkRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -74,7 +74,7 @@ class Link
     {
         $this->picto = $picto;
 
-        $this->setUpdatedAt(new DateTime());
+        $this->setUpdatedAt(new DateTimeImmutable());
 
         return $this;
     }

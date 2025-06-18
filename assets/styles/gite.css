@@ -16,6 +16,8 @@ h2.gite-name {
     margin: 0; /* Supprime les marges par défaut du h2 */
 }
 
+
+/* equipement */
 .equipment-list .equipment-item .equipment-icon {
     filter: brightness(0) saturate(100%);
 }
@@ -26,4 +28,34 @@ h2.gite-name {
 
 .reservation .reservation-color {
     color: var(--color-background-2);
+}
+
+/* images */
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Grille 2x2 */
+.grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem; /* Équivalent à gap-3 de Bootstrap */
+}
+
+
+/* Responsive heights */
+@media (min-width: 768px) {
+    .gallery-height-sm { height: 350px !important; }
+    .gallery-height-md { height: 400px !important; }
+    .gallery-height-lg { height: 500px !important; }
 }
