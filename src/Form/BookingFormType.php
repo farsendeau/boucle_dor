@@ -85,9 +85,6 @@ class BookingFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Booking::class,
-            'constraints' => [
-                new ValidBookingDates()
-            ]
         ]);
     }
 }

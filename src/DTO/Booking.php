@@ -2,8 +2,10 @@
 
 namespace App\DTO;
 
+use App\Validator\Constraints\ValidBookingDates;
 use DateTime;
 
+#[ValidBookingDates]
 class Booking
 {
     public function __construct(
@@ -49,12 +51,12 @@ class Booking
         $this->mail = $mail;
     }
 
-    public function getNbAdult(): ?string
+    public function getNbAdult(): ?int
     {
         return $this->nbAdult;
     }
 
-    public function setNbAdult(?string $nbAdult): void
+    public function setNbAdult(?int $nbAdult): void
     {
         $this->nbAdult = $nbAdult;
     }
