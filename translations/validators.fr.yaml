@@ -1,3 +1,6 @@
 tel.invalid: 'Le numéro saisi est invalide'
 The password fields must match.: 'Les champs de mot de passe doivent correspondre.'
 Your password should be at least {{ limit }} characters: 'Votre mot de passe doit contenir au moins {{ limit }} caractères.'
+booking.dates.arrival_before_departure: 'La date d''arrivée doit être antérieure à la date de départ.'
+booking.dates.same_date: 'La date d''arrivée et la date de départ ne peuvent pas être identiques.'
+booking.dates.arrival_too_early: 'La date d''arrivée ne peut pas être antérieure à aujourd''hui.'

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Validator\Constraints\ValidBookingDates;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
@@ -84,6 +85,9 @@ class BookingFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Booking::class,
+            'constraints' => [
+                new ValidBookingDates()
+            ]
         ]);
     }
 }
