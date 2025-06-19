@@ -1,20 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GiteController!{% endblock %}
+{% block title %}{{parent()}}{{ 'gite.gites'|trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {% import 'macro/breadcrumb.html.twig' as breadcrumb %}
+    {{ breadcrumb.render([
+        {
+            name: 'gite.gites',
+            route: 'gite_index'
+        }
+    ]) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('styles/gite.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container my-5">
+        <!-- En-tête de la section -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="text-start mb-3">{{ 'gite.gites'|trans }}</h2>
+            </div>
+        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <!-- Grille des gîtes -->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for gite in gites %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm hover-card">
+                        <!-- Image du gîte -->
+                        <div class="card-img-wrapper position-relative overflow-hidden">
+                            <img src="{{ vich_uploader_asset(gite, 'backgroundImage')|imagine_filter('gite_card') }}"
+                                 class="card-img-top"
+                                 alt="{{ gite.name }}"
+                                 loading="lazy">
+                        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/app/src/Controller/GiteController.php</code></li>
-        <li>Your template at <code>/app/templates/gite/index.html.twig</code></li>
-    </ul>
-</div>
+                        <!-- Contenu de la carte -->
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h4 mt-4">{{ gite.name|title }}</h3>
+
+                            <p class="card-text text-muted mb-3">{{ gite.summary }}</p>
+
+                            <p class="card-text flex-grow-1  mt-4">
+                                {{ gite.description|length > 120 ? gite.description|slice(0, 120) ~ '...' : gite.description }}
+                            </p>
+
+                            <div class=" mt-4 text-end reservation">
+                                <p class="d-inline me-2 reservation-color">{{ 'gite.price_by_night'|trans({'{{ price }}': gite.price }) }}</p>
+                                <a href="{{ path('gite_show', {'slug': gite.slug}) }}"
+                                   class="btn btn-primary btn-lg">
+                                    {{ 'gite.book'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        <h4>{{ 'gite.no_gites_available'|trans }}</h4>
+                        <p class="mb-0">{{ 'gite.check_back_soon'|trans }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center">
+            <h2 class="my-5">{{ 'gite.easily_accessible'|trans }}</h2>
+            <p>{{ 'gite.how_to_find'|trans|raw }}</p>
+        </div>
+
+    </div>
 {% endblock %}

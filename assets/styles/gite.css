@@ -59,3 +59,34 @@ h2.gite-name {
     .gallery-height-md { height: 400px !important; }
     .gallery-height-lg { height: 500px !important; }
 }
+
+/*page index*/
+
+.hover-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.card-img-top {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.hover-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.bg-gradient-dark {
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+
+@media (max-width: 768px) {
+    .card-img-wrapper {
+        height: 200px;
+    }
+}

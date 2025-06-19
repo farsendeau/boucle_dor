@@ -75,3 +75,13 @@ liip_imagine:
                 thumbnail:
                     size: [ 1920, 1080 ]
                     mode: inbound
+        
+        # Filtre pour les cartes de gîtes sur la page index
+        gite_card:
+            quality: 85
+            filters:
+                thumbnail:
+                    size: [400, 500]
+                    mode: outbound
+                    allow_upscale: false
+                strip: ~

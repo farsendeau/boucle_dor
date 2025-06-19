@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\DTO\Booking;
 use App\Entity\Gite\Gite;
 use App\Form\BookingFormType;
+use App\Repository\Gite\GiteRepository;
 use App\Repository\Site\SiteRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,14 +22,17 @@ final class GiteController extends AbstractController
     public function __construct(
         private readonly SiteRepository $siteRepository,
         private readonly MailerInterface $mailer,
+        private readonly GiteRepository $giteRepository,
     ) {
     }
 
     #[Route('/index', name: 'gite_index')]
     public function index(): Response
     {
+        $gites = $this->giteRepository->findAll();
+
         return $this->render('gite/index.html.twig', [
-            'controller_name' => 'GiteController',
+            'gites' => $gites,
         ]);
     }
 
