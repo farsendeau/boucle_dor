@@ -31,3 +31,6 @@
 
 # Claude Code configuration
 CLAUDE.md
+
+# Todo lists (local development only)
+todo_list/

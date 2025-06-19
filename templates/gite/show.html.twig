@@ -235,14 +235,16 @@
             </div>
         {% else %}
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                {% for image in imageBatch %}
+                {% for image in gite.giteImages %}
                     <div class="col">
-                        <div class="card">
+                        <div class="card h-100">
                             <img
                                 role="button"
-                                data-index="{{ loop.index }}"
-                                data-gite-image-src-value="{{ vich_uploader_asset(image, 'image') }}"
-                                src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}" class="card-img-top" alt="{{ image.name }}">
+                                data-action="click->lightbox#open"
+                                data-lightbox-index-param="{{ loop.index - 1 }}"
+                                src="{{ vich_uploader_asset(image, 'image')|imagine_filter('medium') }}"
+                                class="w-100 h-100 object-fit-cover hover-scale"
+                                alt="{{ image.name }}">
                         </div>
                     </div>
                 {% endfor %}
