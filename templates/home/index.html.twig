@@ -17,4 +17,55 @@
             </div>
         </div>
     </div>
+
+    {% if featuredGites is not empty %}
+        <div class="container my-5">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="text-start mb-4">{{ 'gite.gites'|trans }}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for gite in featuredGites %}
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-sm hover-card">
+                            <div class="row g-0">
+                                <!-- Image du gîte -->
+                                <div class="col-md-4">
+                                    <div class="card-img-wrapper position-relative overflow-hidden h-100">
+                                        <img src="{{ vich_uploader_asset(gite, 'backgroundImage')|imagine_filter('gite_card') }}"
+                                             class="card-img h-100 w-100"
+                                             alt="{{ gite.name }}"
+                                             loading="lazy"
+                                             style="object-fit: cover;">
+                                    </div>
+                                </div>
+
+                                <!-- Contenu de la carte -->
+                                <div class="col-md-8">
+                                    <div class="card-body mx-3 d-flex flex-column h-100">
+                                        <h3 class="card-title h4 mt-5">{{ gite.name|title }}</h3>
+
+                                        <p class="card-text text-muted mb-3">{{ gite.summary }}</p>
+
+                                        <p class="card-text mt-4 flex-grow-1">
+                                            {{ gite.description|length > 300 ? gite.description|slice(0, 300) ~ '...' : gite.description }}
+                                        </p>
+
+                                        <div class="mt-5">
+                                            <a href="{{ path('gite_show', {'slug': gite.slug}) }}"
+                                               class="border-bottom pb-2">
+                                                {{ 'gite.book'|trans|upper }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

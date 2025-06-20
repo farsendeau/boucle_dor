@@ -49,6 +49,9 @@ class Gite
     #[ORM\Column]
     private ?int $price = null;
 
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $onHomepage = false;
+
     /**
      * @var Collection<int, Equipment>
      */
@@ -226,6 +229,18 @@ class Gite
                 $giteImage->setGite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isOnHomepage(): bool
+    {
+        return $this->onHomepage;
+    }
+
+    public function setOnHomepage(bool $onHomepage): static
+    {
+        $this->onHomepage = $onHomepage;
 
         return $this;
     }

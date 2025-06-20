@@ -6,6 +6,7 @@ use App\Entity\Gite\Gite;
 use App\Form\EquipmentFormType;
 use App\Form\GiteImageFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -35,6 +36,8 @@ class GiteCrudController extends AbstractCrudController
             TextareaField::new('description', 'Description')
                 ->setFormTypeOption('translation_domain', false),
             IntegerField::new('price', 'Prix de la nuitée')
+                ->setFormTypeOption('translation_domain', false),
+            BooleanField::new('onHomepage', 'Mettre en avant sur la page d\'accueil')
                 ->setFormTypeOption('translation_domain', false),
             TextField::new('backgroundImage', 'Image de fond')
                 ->setFormType(VichImageType::class)
