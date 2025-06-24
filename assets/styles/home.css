@@ -66,3 +66,22 @@
 .services {
     background-color: #f3efe8;
 }
+
+/** ACCESS */
+
+.access .bg-image-container {
+    background-image: url('../images/access.webp');
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+}
+
+.contact-bottom a {
+    color: #000000;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom-color: #474329 !important;
+    border-bottom-width: 3px !important;
+
+}

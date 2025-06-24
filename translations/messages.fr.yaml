@@ -11,6 +11,9 @@ home:
     useful_links: 'Liens utiles'
     all_rights_reserved: 'Tous droits réservés'
     home: 'Accueil'
+    contact_bottom_us: 'Nous contacter'
+    contact_bottom_title: 'Besoin de plus de renseignement ?'
+    contact_bottom_para: 'nous sommes à votre disposition pour toute demande, <br> par mail ou par téléphone'
 login:
     logged_as: 'Vous êtes connecté en tant que {{ user }}'
     logout: 'Deconnexion'
@@ -59,7 +62,8 @@ gite:
     no_gites_available: 'Aucun Gîte pour le moment'
     check_back_soon: 'Revenez voir plus tard'
     price_by_night: 'À partir de {{ price }}€ / nuitée'
-    easily_accessible: 'Accès facile aux gîtes'
-    how_to_find: 'Gare de TrucBidule à 2 km avec des laisions directes <br> depuis Paris, Bordeaux et Lyon <br><br> Accès facile par l''autoroute A6 <br><br> Stationnement privé gratuit sur la propriété'
 service:
     services: 'Nos Services'
+access:
+    easily_accessible: 'Accès facile aux gîtes'
+    how_to_find: 'Gare de TrucBidule à 2 km avec des laisions directes <br> depuis Paris, Bordeaux et Lyon <br><br> Accès facile par l''autoroute A6 <br><br> Stationnement privé gratuit sur la propriété'

@@ -11,6 +11,9 @@ home:
     useful_links: 'Useful links'
     all_rights_reserved: 'All rights reserved'
     home: 'Home'
+    contact_bottom_us: 'Contact us'
+    contact_bottom_title: 'Need more information?'
+    contact_bottom_para: 'We are at your disposal for any request, <br> by email or by phone'
 login:
     logged_as: 'You are logged in as {{ user }}'
     logout: 'Logout'
@@ -59,7 +62,8 @@ gite:
     no_gites_available: 'No Gites available at the moment'
     check_back_soon: 'Check back later'
     price_by_night: 'From {{ price }}€ / night'
-    easily_accessible: 'Easy access to gites'
-    how_to_find: 'TrucBidule station 2 km away with direct connections <br> from Paris, Bordeaux and Lyon <br><br> Easy access via A6 highway <br><br> Free private parking on property'
 service:
     services: 'Nos Services'
+access:
+    easily_accessible: 'Easy access to gites'
+    how_to_find: 'TrucBidule station 2 km away with direct connections <br> from Paris, Bordeaux and Lyon <br><br> Easy access via A6 highway <br><br> Free private parking on property'

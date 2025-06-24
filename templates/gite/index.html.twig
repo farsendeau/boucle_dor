@@ -69,10 +69,7 @@
             {% endfor %}
         </div>
 
-        <div class="text-center">
-            <h2 class="my-5">{{ 'gite.easily_accessible'|trans }}</h2>
-            <p>{{ 'gite.how_to_find'|trans|raw }}</p>
-        </div>
+        {% include 'home/_access.html.twig' %}
 
     </div>
 {% endblock %}

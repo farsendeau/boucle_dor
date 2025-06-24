@@ -116,4 +116,31 @@
             </div>
         </section>
     {% endif %}
+
+
+    <section class="access py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    {% include 'home/_access.html.twig' %}
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="bg-image-container position-relative overflow-hidden">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="contact-bottom py-5">
+        <div class="container text-center">
+            <h3 class="h4">{{ 'home.contact_bottom_title'|trans }}</h3>
+            <p>{{ 'home.contact_bottom_para'|trans|raw }}</p>
+            <a href="{{ path('contact_index') }}"
+               class="btn btn-outline-primary">
+                {{ 'home.contact_bottom_us'|trans }}
+            </a>
+        </div>
+    </section>
 {% endblock %}
