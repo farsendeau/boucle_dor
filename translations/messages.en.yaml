@@ -61,3 +61,5 @@ gite:
     price_by_night: 'From {{ price }}€ / night'
     easily_accessible: 'Easy access to gites'
     how_to_find: 'TrucBidule station 2 km away with direct connections <br> from Paris, Bordeaux and Lyon <br><br> Easy access via A6 highway <br><br> Free private parking on property'
+service:
+    services: 'Nos Services'

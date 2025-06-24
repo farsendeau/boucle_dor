@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Gite\Gite;
+use App\Entity\Services;
 use App\Entity\Site\LegalPage;
 use App\Entity\Site\Site;
 use App\Entity\User;
@@ -75,6 +76,9 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Gîte', 'fa fa-bed');
         yield MenuItem::linkToCrud('Gestion des Gîtes', null, Gite::class);
+
+        yield MenuItem::section('Services', 'fa fa-wrench');
+        yield MenuItem::linkToCrud('Gestion des Services', null, Services::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 

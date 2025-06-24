@@ -22,3 +22,47 @@
     margin: 0;
     padding: 0;
 }
+
+
+/* GITES */
+
+.gite .card-img-wrapper {
+    height: 300px; /* Hauteur fixe */
+    width: 100%;
+}
+
+.gite .card-img-wrapper .card-img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.gite a {
+    color: #000000;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom-color: #474329 !important;
+    border-bottom-width: 3px !important;
+}
+
+.gite header {
+    background: transparent !important;
+}
+
+/** SERVICES */
+
+.service header {
+    background: transparent !important;
+}
+
+.service hr {
+    width: 25%;
+    border-width: 4px;
+    border-color: #474329;
+    margin-left: 0;
+}
+
+.services {
+    background-color: #f3efe8;
+}

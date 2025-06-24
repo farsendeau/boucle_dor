@@ -119,6 +119,13 @@ a:hover {
     font-weight: 500;
 }
 
+.btn-outline-primary {
+    --bs-btn-border-color: var(--color-background-2);
+    --bs-btn-hover-bg: var(--color-link-hover); /* Couleur plus foncée pour le hover */
+    --bs-btn-hover-border-color: var(--color-link-hover);
+    --bs-btn-active-border-color: var(--color-background-2);
+}
+
 .btn {
     border-radius: 0;
     font-family: "darkmode-on", sans-serif;

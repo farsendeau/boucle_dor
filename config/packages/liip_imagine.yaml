@@ -81,7 +81,17 @@ liip_imagine:
             quality: 85
             filters:
                 thumbnail:
-                    size: [400, 500]
+                    size: [600, 400]
+                    mode: outbound
+                    allow_upscale: false
+                strip: ~
+        
+        # Filtre pour les cartes de services sur la page index
+        service_card:
+            quality: 85
+            filters:
+                thumbnail:
+                    size: [350, 250]
                     mode: outbound
                     allow_upscale: false
                 strip: ~

@@ -19,53 +19,101 @@
     </div>
 
     {% if featuredGites is not empty %}
-        <div class="container my-5">
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h2 class="text-start mb-4">{{ 'gite.gites'|trans }}</h2>
+        <section class="gites py-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="text-start mb-4">{{ 'gite.gites'|trans }}</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                {% for gite in featuredGites %}
-                    <div class="col-12 mb-4">
-                        <div class="card shadow-sm hover-card">
-                            <div class="row g-0">
-                                <!-- Image du gîte -->
-                                <div class="col-md-4">
-                                    <div class="card-img-wrapper position-relative overflow-hidden h-100">
-                                        <img src="{{ vich_uploader_asset(gite, 'backgroundImage')|imagine_filter('gite_card') }}"
-                                             class="card-img h-100 w-100"
-                                             alt="{{ gite.name }}"
-                                             loading="lazy"
-                                             style="object-fit: cover;">
+                <div class="row">
+                    {% for gite in featuredGites %}
+                        <div class="col-12 mb-4 gite">
+                            <article class="card shadow-sm hover-card">
+                                <div class="row g-0">
+                                    <!-- Image du gîte -->
+                                    <div class="col-md-5">
+                                        <div class="card-img-wrapper position-relative overflow-hidden">
+                                            <img src="{{ vich_uploader_asset(gite, 'backgroundImage')|imagine_filter('gite_card') }}"
+                                                 class="card-img h-100 w-100"
+                                                 alt="{{ gite.name }}"
+                                                 loading="lazy"
+                                                 style="object-fit: cover;">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- Contenu de la carte -->
-                                <div class="col-md-8">
-                                    <div class="card-body mx-3 d-flex flex-column h-100">
-                                        <h3 class="card-title h4 mt-5">{{ gite.name|title }}</h3>
+                                    <!-- Contenu de la carte -->
+                                    <div class="col-md-7">
+                                        <div class="card-body mx-3 d-flex flex-column h-100">
+                                            <header>
+                                                <h3 class="card-title h4 mt-1">{{ gite.name|title }}</h3>
+                                            </header>
 
-                                        <p class="card-text text-muted mb-3">{{ gite.summary }}</p>
+                                            <p class="card-text text-muted mb-3">{{ gite.summary }}</p>
 
-                                        <p class="card-text mt-4 flex-grow-1">
-                                            {{ gite.description|length > 300 ? gite.description|slice(0, 300) ~ '...' : gite.description }}
-                                        </p>
+                                            <p class="card-text mt-4 flex-grow-1">
+                                                {{ gite.description|length > 300 ? gite.description|slice(0, 300) ~ '...' : gite.description }}
+                                            </p>
 
-                                        <div class="mt-5">
-                                            <a href="{{ path('gite_show', {'slug': gite.slug}) }}"
-                                               class="border-bottom pb-2">
-                                                {{ 'gite.book'|trans|upper }}
-                                            </a>
+                                            <div class="mt-2">
+                                                <a href="{{ path('gite_show', {'slug': gite.slug}) }}"
+                                                   class="btn btn-outline-primary">
+                                                    {{ 'gite.book'|trans|upper }}
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        </section>
+    {% endif %}
+
+    {% if services is not empty %}
+        <section class="services py-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="text-start mb-4">{{ 'service.services'|trans }}</h2>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    {% for service in services %}
+                        <div class="col-lg-4 col-md-6 col-12 service">
+                            <article class="card h-100 shadow-sm hover-card border-0">
+                                {% if service.imageName %}
+                                    <div class="position-relative overflow-hidden">
+                                        <img src="{{ vich_uploader_asset(service, 'image')|imagine_filter('service_card') }}"
+                                             class="card-img-top"
+                                             alt="{{ service.name }}"
+                                             loading="lazy"
+                                             style="height: 250px; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <header>
+                                        <h3 class="card-title h5 mb-3">{{ service.name }}</h3>
+                                    </header>
+                                    <p class="card-text text-muted">{{ service.summary }}</p>
+
+                                    <hr>
+
+                                    <div class="mt-auto">
+                                        <p class="card-text">
+                                            {{ service.description|length > 150 ? service.description|slice(0, 150) ~ '...' : service.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
     {% endif %}
 {% endblock %}
