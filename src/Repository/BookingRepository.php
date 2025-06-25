@@ -163,7 +163,7 @@ class BookingRepository extends ServiceEntityRepository
         $today = new DateTime();
 
         return $this->createQueryBuilder('b')
-            ->select('partial b.{id, firstname, lastname, mail, dateArrival, dateDeparture}')
+            ->select('partial b.{id, firstname, lastname, mail, dateArrival, dateDeparture, totalPrice}')
             ->join('b.gite', 'g')
             ->addSelect('partial g.{id, name, backgroundImageName}')
             ->andWhere('b.status = :status')
@@ -186,7 +186,7 @@ class BookingRepository extends ServiceEntityRepository
         $today = new DateTime();
 
         return $this->createQueryBuilder('b')
-            ->select('partial b.{id, firstname, lastname, mail, dateArrival, dateDeparture}')
+            ->select('partial b.{id, firstname, lastname, mail, dateArrival, dateDeparture, totalPrice}')
             ->join('b.gite', 'g')
             ->addSelect('partial g.{id, name, backgroundImageName}')
             ->andWhere('b.status = :status')
@@ -196,5 +196,60 @@ class BookingRepository extends ServiceEntityRepository
             ->orderBy('b.dateArrival', 'ASC')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Get revenue statistics by gite and month for the last 12 months
+     *
+     * @return array
+     */
+    public function getRevenueByGiteAndMonth(): array
+    {
+        // Période : 12 mois précédents (excluant le mois en cours)
+        $startDate = new DateTime('-12 months');
+        $startDate->modify('first day of this month');
+
+        // Fin : dernier jour du mois précédent
+        $endDate = new DateTime('first day of this month');
+        $endDate->modify('-1 day');
+
+        $bookings = $this->createQueryBuilder('b')
+            ->select('g.name as gite_name, b.dateArrival, b.totalPrice')
+            ->join('b.gite', 'g')
+            ->where('b.status = :status')
+            ->andWhere('b.dateArrival >= :startDate')
+            ->andWhere('b.dateArrival <= :endDate')
+            ->setParameter('status', BookingStatus::VALIDATED)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->orderBy('b.dateArrival', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+
+        // Group by gite and month in PHP
+        $groupedData = [];
+        foreach ($bookings as $booking) {
+            $giteName = $booking['gite_name'];
+            $date = $booking['dateArrival'];
+            $year = (int) $date->format('Y');
+            $month = (int) $date->format('m');
+            $price = (float) $booking['totalPrice'];
+
+            $key = $giteName . '_' . $year . '_' . $month;
+
+            if (!isset($groupedData[$key])) {
+                $groupedData[$key] = [
+                    'gite_name' => $giteName,
+                    'year' => $year,
+                    'month' => $month,
+                    'total_revenue' => 0
+                ];
+            }
+
+            $groupedData[$key]['total_revenue'] += $price;
+        }
+
+        return array_values($groupedData);
     }
 }

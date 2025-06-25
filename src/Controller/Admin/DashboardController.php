@@ -35,9 +35,12 @@ class DashboardController extends AbstractDashboardController
     {
         $currentBookings = $this->bookingRepository->findCurrentBookings();
         $upcomingBookings = $this->bookingRepository->findUpcomingBookings();
+        $revenueData = $this->prepareRevenueData();
+
         return $this->render('admin/dashboard.html.twig', [
             'currentBookings' => $currentBookings,
             'upcomingBookings' => $upcomingBookings,
+            'revenueData' => json_encode($revenueData),
         ]);
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
@@ -97,4 +100,75 @@ class DashboardController extends AbstractDashboardController
             ->addCssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
             ->addHtmlContentToHead('<style>.trix-button--icon-code { display: none !important; }</style>');
     }
+
+    private function prepareRevenueData(): array
+    {
+        $revenueData = $this->bookingRepository->getRevenueByGiteAndMonth();
+
+        // Prepare data structure
+        $gites = [];
+        $months = [];
+        $dataByGite = [];
+
+        // Extract all gites and months
+        foreach ($revenueData as $data) {
+            $giteName = $data['gite_name'];
+            $monthKey = $data['year'] . '-' . str_pad($data['month'], 2, '0', STR_PAD_LEFT);
+
+            if (!in_array($giteName, $gites)) {
+                $gites[] = $giteName;
+            }
+
+            if (!in_array($monthKey, $months)) {
+                $months[] = $monthKey;
+            }
+
+            $dataByGite[$giteName][$monthKey] = (float) $data['total_revenue'];
+        }
+
+        sort($months);
+
+        // Convert month keys to readable labels
+        $monthLabels = array_map(function($monthKey) {
+            [$year, $month] = explode('-', $monthKey);
+            $monthNames = [
+                '01' => 'Jan', '02' => 'Fév', '03' => 'Mar', '04' => 'Avr',
+                '05' => 'Mai', '06' => 'Jun', '07' => 'Jul', '08' => 'Aoû',
+                '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Déc'
+            ];
+            return $monthNames[$month] . ' ' . $year;
+        }, $months);
+
+        // Prepare datasets for each gite
+        $datasets = [];
+        $colors = [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 205, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+            'rgba(255, 159, 64, 0.8)'
+        ];
+
+        foreach ($gites as $index => $gite) {
+            $giteData = [];
+            foreach ($months as $month) {
+                $giteData[] = $dataByGite[$gite][$month] ?? 0;
+            }
+
+            $datasets[] = [
+                'label' => $gite,
+                'data' => $giteData,
+                'backgroundColor' => $colors[$index % count($colors)],
+                'borderColor' => str_replace('0.8', '1', $colors[$index % count($colors)]),
+                'borderWidth' => 1
+            ];
+        }
+
+        return [
+            'labels' => $monthLabels,
+            'datasets' => $datasets
+        ];
+    }
+
 }

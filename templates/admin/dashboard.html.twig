@@ -4,6 +4,51 @@
     <h1>Dashboard</h1>
 {% endblock %}
 
+{% block head_stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('revenueChart');
+            if (ctx) {
+                const chartData = {{ revenueData|raw }};
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Revenus par gîte et par mois'
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + ' €';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block main %}
     <div class="row">
         <div class="col-md-6">
@@ -39,6 +84,11 @@
                                                 <small class="text-muted">
                                                     Du {{ booking.dateArrival|date('d/m/Y') }}
                                                     au {{ booking.dateDeparture|date('d/m/Y') }}
+                                                </small>
+                                            </p>
+                                            <p class="card-text">
+                                                <small class="text-muted">
+                                                    Prix {{ booking.totalPrice }}€
                                                 </small>
                                             </p>
                                         </div>
@@ -86,12 +136,34 @@
                                                     au {{ booking.dateDeparture|date('d/m/Y') }}
                                                 </small>
                                             </p>
+                                            <p class="card-text">
+                                                <small class="text-muted">
+                                                    Prix {{ booking.totalPrice }}€
+                                                </small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphique des revenus -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-chart-bar text-info"></i>
+                        Revenus par gîte et par mois
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart" width="400" height="200"></canvas>
                 </div>
             </div>
         </div>
