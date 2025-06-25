@@ -2,11 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Booking;
 use App\Entity\Gite\Gite;
 use App\Entity\Services;
 use App\Entity\Site\LegalPage;
 use App\Entity\Site\Site;
 use App\Entity\User;
+use App\Repository\BookingRepository;
 use App\Repository\Site\SiteRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -25,12 +27,18 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private readonly SiteRepository $siteRepository,
+        private readonly BookingRepository $bookingRepository,
     ) {
     }
 
     public function index(): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        $currentBookings = $this->bookingRepository->findCurrentBookings();
+        $upcomingBookings = $this->bookingRepository->findUpcomingBookings();
+        return $this->render('admin/dashboard.html.twig', [
+            'currentBookings' => $currentBookings,
+            'upcomingBookings' => $upcomingBookings,
+        ]);
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -66,9 +74,9 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::section('Admin', 'fa fa-tools');
-        yield MenuItem::linkToRoute('Retour au site', 'fa fa-home', 'home_index');
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer');
-        yield MenuItem::linkToCrud('Utilisateur Admin', 'fa fa-list', User::class);
+        yield MenuItem::linkToDashboard('Dashboard');
+        yield MenuItem::linkToRoute('Retour au site', null, 'home_index');
+        yield MenuItem::linkToCrud('Utilisateur Admin', null, User::class);
 
         yield MenuItem::section('Site', 'fa fa-cog');
         yield MenuItem::linkToCrud('Configuration du site', null, Site::class);
@@ -76,6 +84,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Gîte', 'fa fa-bed');
         yield MenuItem::linkToCrud('Gestion des Gîtes', null, Gite::class);
+        yield MenuItem::linkToCrud('Réservations', null, Booking::class);
 
         yield MenuItem::section('Services', 'fa fa-wrench');
         yield MenuItem::linkToCrud('Gestion des Services', null, Services::class);
@@ -85,6 +94,7 @@ class DashboardController extends AbstractDashboardController
     public function configureAssets(): Assets
     {
         return Assets::new()
+            ->addCssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
             ->addHtmlContentToHead('<style>.trix-button--icon-code { display: none !important; }</style>');
     }
 }

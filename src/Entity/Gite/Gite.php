@@ -2,6 +2,7 @@
 
 namespace App\Entity\Gite;
 
+use App\Entity\Booking;
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Gite\GiteRepository;
 use DateTimeImmutable;
@@ -64,10 +65,17 @@ class Gite
     #[ORM\OneToMany(targetEntity: GiteImage::class, mappedBy: 'gite', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $giteImages;
 
+    /**
+     * @var Collection<int, Booking>
+     */
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'gite', cascade: ['persist'], orphanRemoval: true)]
+    private Collection $bookings;
+
     public function __construct()
     {
         $this->equipments = new ArrayCollection();
         $this->giteImages = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,5 +251,40 @@ class Gite
         $this->onHomepage = $onHomepage;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): static
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings->add($booking);
+            $booking->setGite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): static
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getGite() === $this) {
+                $booking->setGite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name ?? '';
     }
 }

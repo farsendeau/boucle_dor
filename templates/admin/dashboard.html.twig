@@ -1,1 +1,99 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+    <h1>Dashboard</h1>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-play-circle text-success"></i>
+                        Réservations en cours
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if currentBookings is empty %}
+                        <p class="text-muted">Aucune réservation en cours</p>
+                    {% else %}
+                        {% for booking in currentBookings %}
+                            <div class="card mb-3 border-success">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="{{ vich_uploader_asset(booking.gite, 'backgroundImage')|imagine_filter('thumbnail_large') }}"
+                                             class="img-fluid rounded-start h-100"
+                                             style="object-fit: cover;"
+                                             alt="{{ booking.gite.name }}" loading="lazy">
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{ booking.gite.name }}</h6>
+                                            <p class="card-text">
+                                                <strong>{{ booking.firstname }} {{ booking.lastname }}</strong><br>
+                                                <small class="text-muted">{{ booking.mail }}</small>
+                                            </p>
+                                            <p class="card-text">
+                                                <small class="text-muted">
+                                                    Du {{ booking.dateArrival|date('d/m/Y') }}
+                                                    au {{ booking.dateDeparture|date('d/m/Y') }}
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-calendar-alt text-primary"></i>
+                        Réservations à venir
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if upcomingBookings is empty %}
+                        <p class="text-muted">Aucune réservation à venir</p>
+                    {% else %}
+                        {% for booking in upcomingBookings %}
+                            <div class="card mb-3 border-primary">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="{{ vich_uploader_asset(booking.gite, 'backgroundImage')|imagine_filter('thumbnail_large') }}"
+                                             class="img-fluid rounded-start h-100"
+                                             style="object-fit: cover;"
+                                             alt="{{ booking.gite.name }}"
+                                             loading="lazy">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{ booking.gite.name }}</h6>
+                                            <p class="card-text">
+                                                <strong>{{ booking.firstname }} {{ booking.lastname }}</strong><br>
+                                                <small class="text-muted">{{ booking.mail }}</small>
+                                            </p>
+                                            <p class="card-text">
+                                                <small class="text-muted">
+                                                    Du {{ booking.dateArrival|date('d/m/Y') }}
+                                                    au {{ booking.dateDeparture|date('d/m/Y') }}
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -4,8 +4,6 @@ namespace App\Entity\Gite;
 
 use App\Entity\Trait\UpdatedAtTrait;
 use App\Repository\Gite\EquipmentRepository;
-use DateTime;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
