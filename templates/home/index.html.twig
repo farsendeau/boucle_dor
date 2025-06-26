@@ -9,11 +9,38 @@
 
 {% block body %}
     <div class="container-fluid p-0">
-        <div class="image-wrapper">
-            <div class="background-image-container"></div>
+        <div class="background-image-container"></div>
+    </div>
 
-            <div class="image-overlay">
-                <!-- Contenu à superposer sur l'image -->
+    <div class="container next-availability position-relative">
+        <div class="row">
+            <div class="col-12">
+                <div class="hero-block">
+                    <div class="row g-0">
+                        <div class="col-9 hero-left">
+                            <div class="hero-text">
+                                {{ 'home.hero_text'|trans|raw }}
+                            </div>
+                        </div>
+                        <div class="col-3 hero-right">
+                            {% if nextAvailabilitySlot %}
+                                <div class="availability-info text-center">
+                                    <p class="small mb-2">{{ 'home.next_availability'|trans }}</p>
+                                    <p class="h3 mb-3">{{ formattedDate }}</p>
+                                    <a href="{{ path('gite_show', {'slug': nextAvailabilitySlot.gite.slug}) }}"
+                                       class="btn btn-outline-primary btn-custom-border">
+                                        {{ 'gite.book'|trans|upper }}
+                                    </a>
+                                </div>
+                            {% else %}
+                                <div class="availability-info text-center">
+                                    <h4 class="h5 mb-2">{{ 'home.no_availability'|trans }}</h4>
+                                    <p class="text-muted">{{ 'home.contact_for_booking'|trans }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -130,7 +157,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="contact-bottom py-5">
         <div class="container text-center">

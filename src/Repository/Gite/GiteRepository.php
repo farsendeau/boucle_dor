@@ -2,6 +2,7 @@
 
 namespace App\Repository\Gite;
 
+use App\DTO\AvailabilitySlot;
 use App\Entity\Gite\Gite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,28 +17,58 @@ class GiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Gite::class);
     }
 
-    //    /**
-    //     * @return Gite[] Returns an array of Gite objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('g.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Gite
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findNextAvailableWeekSlot(): ?AvailabilitySlot
+    {
+        $gites = $this->findAll();
+        $earliestSlot = null;
+        
+        foreach ($gites as $gite) {
+            $slot = $this->findFirstAvailableWeekForGite($gite);
+            if ($slot && (!$earliestSlot || $slot->getStartDate() < $earliestSlot->getStartDate())) {
+                $earliestSlot = $slot;
+            }
+        }
+        
+        return $earliestSlot;
+    }
+    
+    private function findFirstAvailableWeekForGite(Gite $gite): ?AvailabilitySlot
+    {
+        $startDate = new \DateTime();
+        $maxSearchDays = 365; // Limite de recherche à 1 an
+        
+        // Récupérer toutes les réservations validées du gîte
+        $bookings = $this->getEntityManager()
+            ->getRepository(\App\Entity\Booking::class)
+            ->createQueryBuilder('b')
+            ->where('b.gite = :gite')
+            ->andWhere('b.status = :status')
+            ->andWhere('b.dateDeparture >= :today')
+            ->setParameter('gite', $gite)
+            ->setParameter('status', 'validated')
+            ->setParameter('today', $startDate)
+            ->orderBy('b.dateArrival', 'ASC')
+            ->getQuery()
+            ->getResult();
+        
+        for ($day = 0; $day < $maxSearchDays; $day++) {
+            $checkDate = (clone $startDate)->modify("+$day days");
+            $endDate = (clone $checkDate)->modify('+7 days');
+            
+            $hasConflict = false;
+            foreach ($bookings as $booking) {
+                // Vérifier si le créneau de 7 jours entre en conflit avec une réservation
+                if ($booking->getDateArrival() < $endDate && $booking->getDateDeparture() > $checkDate) {
+                    $hasConflict = true;
+                    break;
+                }
+            }
+            
+            if (!$hasConflict) {
+                return new AvailabilitySlot($gite, $checkDate, $endDate);
+            }
+        }
+        
+        return null;
+    }
 }

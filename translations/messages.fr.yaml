@@ -14,6 +14,8 @@ home:
     contact_bottom_us: 'Nous contacter'
     contact_bottom_title: 'Besoin de plus de renseignement ?'
     contact_bottom_para: 'nous sommes à votre disposition pour toute demande, <br> par mail ou par téléphone'
+    hero_text: 'Ressource-vous dans l''un de nos gîtes d''exception situés <br> en plein cœur la vallée des grands crus de Bourgogne'
+    next_availability: 'Prochaine disponibilité le'
 login:
     logged_as: 'Vous êtes connecté en tant que {{ user }}'
     logout: 'Deconnexion'

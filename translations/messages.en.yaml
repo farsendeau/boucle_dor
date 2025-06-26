@@ -14,6 +14,8 @@ home:
     contact_bottom_us: 'Contact us'
     contact_bottom_title: 'Need more information?'
     contact_bottom_para: 'We are at your disposal for any request, <br> by email or by phone'
+    hero_text: 'Recharge yourself in one of our exceptional gîtes located  in the heart of Burgundy''s grand cru valley'    
+    next_availability: 'Next availability on'
 login:
     logged_as: 'You are logged in as {{ user }}'
     logout: 'Logout'

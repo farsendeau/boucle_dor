@@ -8,7 +8,6 @@ use App\Form\BookingFormType;
 use App\Repository\BookingRepository;
 use App\Repository\Gite\GiteRepository;
 use App\Repository\Site\SiteRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +25,6 @@ final class GiteController extends AbstractController
         private readonly MailerInterface $mailer,
         private readonly GiteRepository $giteRepository,
         private readonly BookingRepository $bookingRepository,
-        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 
