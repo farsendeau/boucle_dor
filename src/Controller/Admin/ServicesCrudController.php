@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Services;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -21,6 +22,7 @@ class ServicesCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            FormField::addTab('Infos générales'),
             TextField::new('name', 'Nom')
                 ->setFormTypeOption('translation_domain', false),
             TextField::new('summary', 'Résumé')
@@ -37,6 +39,14 @@ class ServicesCrudController extends AbstractCrudController
                     'asset_helper' => true,
                     'constraints' => [new NotNull(['groups' => ['create']])]
                 ])
+                ->onlyOnForms(),
+            
+            FormField::addTab('Traductions Anglaises'),
+            TextField::new('summaryEn', 'Résumé EN')
+                ->setFormTypeOption('translation_domain', false)
+                ->onlyOnForms(),
+            TextareaField::new('descriptionEn', 'Description EN')
+                ->setFormTypeOption('translation_domain', false)
                 ->onlyOnForms()
         ];
     }

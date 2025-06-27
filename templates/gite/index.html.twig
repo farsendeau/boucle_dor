@@ -43,10 +43,11 @@
                         <div class="card-body d-flex flex-column">
                             <h3 class="card-title h4 mt-4">{{ gite.name|title }}</h3>
 
-                            <p class="card-text text-muted mb-3">{{ gite.summary }}</p>
+                            <p class="card-text text-muted mb-3">{{ app.locale == 'fr' ? gite.summary : gite.summaryEn }}</p>
 
                             <p class="card-text flex-grow-1  mt-4">
-                                {{ gite.description|length > 120 ? gite.description|slice(0, 120) ~ '...' : gite.description }}
+                                {% set description = app.locale == 'fr' ? gite.description : gite.descriptionEn %}
+                                {{ description|length > 120 ? description|slice(0, 120) ~ '...' : description }}
                             </p>
 
                             <div class=" mt-4 text-end reservation">

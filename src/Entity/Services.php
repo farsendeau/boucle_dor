@@ -40,6 +40,12 @@ class Services
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $summaryEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $descriptionEn = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +111,30 @@ class Services
     public function setImageName(?string $imageName): static
     {
         $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getSummaryEn(): ?string
+    {
+        return $this->summaryEn;
+    }
+
+    public function setSummaryEn(?string $summaryEn): static
+    {
+        $this->summaryEn = $summaryEn;
+
+        return $this;
+    }
+
+    public function getDescriptionEn(): ?string
+    {
+        return $this->descriptionEn;
+    }
+
+    public function setDescriptionEn(?string $descriptionEn): static
+    {
+        $this->descriptionEn = $descriptionEn;
 
         return $this;
     }

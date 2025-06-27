@@ -25,6 +25,16 @@ class EquipmentFormType extends AbstractType
                 'constraints' => new NotBlank(),
                 'translation_domain' => false,
             ])
+            ->add('nameEn', TextType::class, [
+                'label' => 'Nom EN',
+                'required' => false,
+                'translation_domain' => false,
+            ])
+            ->add('descriptionEn', TextType::class, [
+                'label' => 'Description EN',
+                'required' => false,
+                'translation_domain' => false,
+            ])
             ->add('picto', VichImageType::class, [
                 'label' => 'Picto',
                 'required' => false,

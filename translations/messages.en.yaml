@@ -64,6 +64,7 @@ gite:
     no_gites_available: 'No Gites available at the moment'
     check_back_soon: 'Check back later'
     price_by_night: 'From {{ price }}€ / night'
+    description: 'Description'
 service:
     services: 'Nos Services'
 access:

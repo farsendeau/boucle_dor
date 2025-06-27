@@ -77,10 +77,11 @@
                                                 <h3 class="card-title h4 mt-1">{{ gite.name|title }}</h3>
                                             </header>
 
-                                            <p class="card-text text-muted mb-3">{{ gite.summary }}</p>
+                                            <p class="card-text text-muted mb-3">{{ app.locale == 'fr' ? gite.summary : gite.summaryEn }}</p>
 
                                             <p class="card-text mt-4 flex-grow-1">
-                                                {{ gite.description|length > 300 ? gite.description|slice(0, 300) ~ '...' : gite.description }}
+                                                {% set description = app.locale == 'fr' ? gite.description : gite.descriptionEn %}
+                                                {{ description|length > 300 ? description|slice(0, 300) ~ '...' : description }}
                                             </p>
 
                                             <div class="mt-2">
@@ -126,13 +127,14 @@
                                     <header>
                                         <h3 class="card-title h5 mb-3">{{ service.name }}</h3>
                                     </header>
-                                    <p class="card-text text-muted">{{ service.summary }}</p>
+                                    <p class="card-text text-muted">{{ app.locale == 'fr' ? service.summary : service.summaryEn }}</p>
 
                                     <hr>
 
                                     <div class="mt-auto">
                                         <p class="card-text">
-                                            {{ service.description|length > 150 ? service.description|slice(0, 150) ~ '...' : service.description }}
+                                            {% set serviceDescription = app.locale == 'fr' ? service.description : service.descriptionEn %}
+                                            {{ serviceDescription|length > 150 ? serviceDescription|slice(0, 150) ~ '...' : serviceDescription }}
                                         </p>
                                     </div>
                                 </div>

@@ -71,6 +71,15 @@ class Gite
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'gite', cascade: ['persist'], orphanRemoval: true)]
     private Collection $bookings;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $titleEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $summaryEn = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $descriptionEn = null;
+
     public function __construct()
     {
         $this->equipments = new ArrayCollection();
@@ -286,5 +295,41 @@ class Gite
     public function __toString(): string
     {
         return $this->name ?? '';
+    }
+
+    public function getTitleEn(): ?string
+    {
+        return $this->titleEn;
+    }
+
+    public function setTitleEn(?string $titleEn): static
+    {
+        $this->titleEn = $titleEn;
+
+        return $this;
+    }
+
+    public function getSummaryEn(): ?string
+    {
+        return $this->summaryEn;
+    }
+
+    public function setSummaryEn(?string $summaryEn): static
+    {
+        $this->summaryEn = $summaryEn;
+
+        return $this;
+    }
+
+    public function getDescriptionEn(): ?string
+    {
+        return $this->descriptionEn;
+    }
+
+    public function setDescriptionEn(?string $descriptionEn): static
+    {
+        $this->descriptionEn = $descriptionEn;
+
+        return $this;
     }
 }

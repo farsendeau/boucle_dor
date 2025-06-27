@@ -36,15 +36,16 @@
                 <div class="col-lg-8">
                     <!-- Section principale -->
                     <div class="mb-5">
-                        <h2 class="mb-3">{{ gite.title }}</h2>
-                        <p class="mb-4">{{ gite.summary }}</p>
+                        <h2 class="mb-3">{{ app.locale == 'fr' ? gite.title : gite.titleEn }}</h2>
+                        <p class="mb-4">{{ app.locale == 'fr' ? gite.summary : gite.summaryEn }}</p>
                     </div>
 
                     <!-- Description -->
                     <div class="mb-5">
-                        <h3 class="h4 mb-3">Description</h3>
+                        <h3 class="h4 mb-3">{{ 'gite.description'|trans }}</h3>
                         <div class="text-muted">
-                            {{ gite.description|nl2br }}
+                            {% set description = app.locale == 'fr' ? gite.description : gite.descriptionEn %}
+                            {{ description|nl2br }}
                         </div>
                     </div>
 
@@ -62,8 +63,8 @@
                                              class="equipment-icon">
                                     </div>
                                     <div class="flex-grow-1">
-                                        <p class="equipment-title mb-1">{{ equipment.name }}</p>
-                                        <p class="equipment-description mb-0 text-muted">{{ equipment.description }}</p>
+                                        <p class="equipment-title mb-1">{{ app.locale == 'fr' ? equipment.name : equipment.nameEn }}</p>
+                                        <p class="equipment-description mb-0 text-muted">{{ app.locale == 'fr' ? equipment.description : equipment.descriptionEn }}</p>
                                     </div>
                                 </div>
                             {% endfor %}

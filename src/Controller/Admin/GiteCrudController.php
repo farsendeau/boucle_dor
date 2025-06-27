@@ -8,6 +8,7 @@ use App\Form\GiteImageFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -27,9 +28,10 @@ class GiteCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $fields =  [
+            FormField::addTab('Infos générales'),
             TextField::new('name', 'Nom')
                 ->setFormTypeOption('translation_domain', false),
-            TextField::new('title', 'titre')
+            TextField::new('title', 'Titre')
                 ->setFormTypeOption('translation_domain', false),
             TextField::new('summary', 'Résumé')
                 ->setFormTypeOption('translation_domain', false),
@@ -70,6 +72,17 @@ class GiteCrudController extends AbstractCrudController
             ])
             ->allowAdd()
             ->allowDelete()
+            ->onlyOnForms();
+
+        $fields[] = FormField::addTab('Traductions Anglaises');
+        $fields[] = TextField::new('titleEn', 'Titre EN')
+            ->setFormTypeOption('translation_domain', false)
+            ->onlyOnForms();
+        $fields[] = TextField::new('summaryEn', 'Résumé EN')
+            ->setFormTypeOption('translation_domain', false)
+            ->onlyOnForms();
+        $fields[] = TextareaField::new('descriptionEn', 'Description EN')
+            ->setFormTypeOption('translation_domain', false)
             ->onlyOnForms();
 
         return $fields;
