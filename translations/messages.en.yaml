@@ -68,4 +68,6 @@ service:
     services: 'Nos Services'
 access:
     easily_accessible: 'Easy access to gites'
-    how_to_find: 'TrucBidule station 2 km away with direct connections <br> from Paris, Bordeaux and Lyon <br><br> Easy access via A6 highway <br><br> Free private parking on property'
+    train: 'TrucBidule station 2 km away with direct connections <br> from Paris, Bordeaux and Lyon '
+    car: 'Easy access via A6 highway'
+    parking: 'Free private parking on property'

@@ -143,6 +143,28 @@
     min-height: 400px;
 }
 
+.access-icon {
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 50px 50px;
+    padding-left: 60px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.access-icon.train {
+    background-image: url('../images/icons/train.svg');
+}
+
+.access-icon.car {
+    background-image: url('../images/icons/car.svg');
+}
+
+.access-icon.parking {
+    background-image: url('../images/icons/parking.svg');
+}
+
 .contact-bottom a {
     color: #000000;
     border-top: none !important;
