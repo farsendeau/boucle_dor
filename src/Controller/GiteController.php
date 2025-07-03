@@ -8,6 +8,7 @@ use App\Form\BookingFormType;
 use App\Repository\BookingRepository;
 use App\Repository\Gite\GiteRepository;
 use App\Repository\Site\SiteRepository;
+use App\Repository\ActivityRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ final class GiteController extends AbstractController
         private readonly MailerInterface $mailer,
         private readonly GiteRepository $giteRepository,
         private readonly BookingRepository $bookingRepository,
+        private readonly ActivityRepository $activityRepository,
     ) {
     }
 
@@ -32,9 +34,11 @@ final class GiteController extends AbstractController
     public function index(): Response
     {
         $gites = $this->giteRepository->findAll();
+        $activities = $this->activityRepository->findAll();
 
         return $this->render('gite/index.html.twig', [
             'gites' => $gites,
+            'activities' => $activities,
         ]);
     }
 

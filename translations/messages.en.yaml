@@ -66,7 +66,9 @@ gite:
     price_by_night: 'From {{ price }}€ / night'
     description: 'Description'
 service:
-    services: 'Nos Services'
+    services: 'Our Services'
+activity:
+    activities: 'Nearby Activities'
 access:
     easily_accessible: 'Easy access to gites'
     train: 'TrucBidule station 2 km away with direct connections <br> from Paris, Bordeaux and Lyon '

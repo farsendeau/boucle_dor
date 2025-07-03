@@ -90,3 +90,17 @@ h2.gite-name {
         height: 200px;
     }
 }
+
+/* Section activities */
+.activities {
+    background-color: #e2dfd6;
+}
+
+.activities .activity header {
+    background-color: transparent;
+}
+
+.activities .activity .card {
+    border: none;
+    background-color: #e2dfd6;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Activity;
 use App\Entity\Booking;
 use App\Entity\Gite\Gite;
 use App\Entity\Services;
@@ -91,6 +92,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Services', 'fa fa-wrench');
         yield MenuItem::linkToCrud('Gestion des Services', null, Services::class);
+        yield MenuItem::linkToCrud('Gestion des Activités', null, Activity::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 

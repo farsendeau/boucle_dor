@@ -26,7 +26,7 @@
                             {% if nextAvailabilitySlot %}
                                 <div class="availability-info text-center">
                                     <p class="small mb-2">{{ 'home.next_availability'|trans }}</p>
-                                    <p class="h3 mb-3">{{ formattedDate }}</p>
+                                    <p class="date-display mb-3">{{ formattedDate }}</p>
                                     <a href="{{ path('gite_show', {'slug': nextAvailabilitySlot.gite.slug}) }}"
                                        class="btn btn-outline-primary btn-custom-border">
                                         {{ 'gite.book'|trans|upper }}
@@ -79,9 +79,9 @@
 
                                             <p class="card-text text-muted mb-3">{{ app.locale == 'fr' ? gite.summary : gite.summaryEn }}</p>
 
-                                            <p class="card-text mt-4 flex-grow-1">
+                                            <p class="card-text mt-4 pe-5 flex-grow-1">
                                                 {% set description = app.locale == 'fr' ? gite.description : gite.descriptionEn %}
-                                                {{ description|length > 300 ? description|slice(0, 300) ~ '...' : description }}
+                                                {{ description|length > 250 ? description|slice(0, 250) ~ '...' : description }}
                                             </p>
 
                                             <div class="mt-2">
@@ -113,7 +113,7 @@
                 <div class="row g-4">
                     {% for service in services %}
                         <div class="col-lg-4 col-md-6 col-12 service">
-                            <article class="card h-100 shadow-sm hover-card border-0">
+                            <article class="card h-100">
                                 {% if service.imageName %}
                                     <div class="position-relative overflow-hidden">
                                         <img src="{{ vich_uploader_asset(service, 'image')|imagine_filter('service_card') }}"
@@ -127,14 +127,13 @@
                                     <header>
                                         <h3 class="card-title h5 mb-3">{{ service.name }}</h3>
                                     </header>
-                                    <p class="card-text text-muted">{{ app.locale == 'fr' ? service.summary : service.summaryEn }}</p>
+                                    <p class="card-text text-muted mb-0">{{ app.locale == 'fr' ? service.summary : service.summaryEn }}</p>
 
                                     <hr>
 
-                                    <div class="mt-auto">
+                                    <div class="service-description">
                                         <p class="card-text">
-                                            {% set serviceDescription = app.locale == 'fr' ? service.description : service.descriptionEn %}
-                                            {{ serviceDescription|length > 150 ? serviceDescription|slice(0, 150) ~ '...' : serviceDescription }}
+                                            {{ app.locale == 'fr' ? service.description : service.descriptionEn }}
                                         </p>
                                     </div>
                                 </div>

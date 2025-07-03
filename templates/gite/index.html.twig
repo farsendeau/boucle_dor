@@ -31,33 +31,35 @@
             {% for gite in gites %}
                 <div class="col">
                     <div class="card h-100 shadow-sm hover-card">
-                        <!-- Image du gîte -->
-                        <div class="card-img-wrapper position-relative overflow-hidden">
-                            <img src="{{ vich_uploader_asset(gite, 'backgroundImage')|imagine_filter('gite_card') }}"
-                                 class="card-img-top"
-                                 alt="{{ gite.name }}"
-                                 loading="lazy">
-                        </div>
-
-                        <!-- Contenu de la carte -->
-                        <div class="card-body d-flex flex-column">
-                            <h3 class="card-title h4 mt-4">{{ gite.name|title }}</h3>
-
-                            <p class="card-text text-muted mb-3">{{ app.locale == 'fr' ? gite.summary : gite.summaryEn }}</p>
-
-                            <p class="card-text flex-grow-1  mt-4">
-                                {% set description = app.locale == 'fr' ? gite.description : gite.descriptionEn %}
-                                {{ description|length > 120 ? description|slice(0, 120) ~ '...' : description }}
-                            </p>
-
-                            <div class=" mt-4 text-end reservation">
-                                <p class="d-inline me-2 reservation-color">{{ 'gite.price_by_night'|trans({'{{ price }}': gite.price }) }}</p>
-                                <a href="{{ path('gite_show', {'slug': gite.slug}) }}"
-                                   class="btn btn-primary btn-lg">
-                                    {{ 'gite.book'|trans }}
-                                </a>
+                        <a href="{{ path('gite_show', {'slug': gite.slug}) }}">
+                            <!-- Image du gîte -->
+                            <div class="card-img-wrapper position-relative overflow-hidden">
+                                <img src="{{ vich_uploader_asset(gite, 'backgroundImage')|imagine_filter('gite_card') }}"
+                                     class="card-img-top"
+                                     alt="{{ gite.name }}"
+                                     loading="lazy">
                             </div>
-                        </div>
+
+                            <!-- Contenu de la carte -->
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="card-title h4 mt-4">{{ gite.name|title }}</h3>
+
+                                <p class="card-text text-muted mb-3">{{ app.locale == 'fr' ? gite.summary : gite.summaryEn }}</p>
+
+                                <p class="card-text flex-grow-1  mt-4">
+                                    {% set description = app.locale == 'fr' ? gite.description : gite.descriptionEn %}
+                                    {{ description|length > 120 ? description|slice(0, 120) ~ '...' : description }}
+                                </p>
+
+                                <div class=" mt-4 text-end reservation">
+                                    <p class="d-inline me-2 reservation-color">{{ 'gite.price_by_night'|trans({'{{ price }}': gite.price }) }}</p>
+                                    <a href="{{ path('gite_show', {'slug': gite.slug}) }}"
+                                       class="btn btn-primary btn-lg">
+                                        {{ 'gite.book'|trans }}
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             {% else %}
@@ -69,8 +71,46 @@
                 </div>
             {% endfor %}
         </div>
-
-        {% include 'home/_access.html.twig' with {page: 'gite'} %}
-
     </div>
+
+    {% if activities is not empty %}
+        <section class="activities py-5 mt-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h2 class="text-start mb-4">{{ 'activity.activities'|trans }}</h2>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    {% for activity in activities %}
+                        <div class="col-lg-4 col-md-6 col-12 activity">
+                            <article class="card h-100">
+                                {% if activity.imageName %}
+                                    <div class="position-relative overflow-hidden">
+                                        <img src="{{ vich_uploader_asset(activity, 'image')|imagine_filter('service_card') }}"
+                                             class="card-img-top"
+                                             alt="{{ activity.name }}"
+                                             loading="lazy"
+                                             style="height: 250px; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <header>
+                                        <h3 class="card-title h5 mb-3">{{ activity.name }}</h3>
+                                    </header>
+                                    <p class="card-text text-muted mb-0">{{ app.locale == 'fr' ? activity.summary : activity.summaryEn }}</p>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <div class="container  mb-5">
+            {% include 'home/_access.html.twig' with {page: 'gite'} %}
+        </div>
+    {% endif %}
+
 {% endblock %}

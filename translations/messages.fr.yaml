@@ -67,9 +67,11 @@ gite:
     description: 'Description'
 service:
     services: 'Nos Services'
+activity:
+    activities: 'Activités à proximité'
 access:
     easily_accessible: 'Accès facile aux gîtes'
-    train: 'Gare de TrucBidule à 2 km avec des laisions directes <br> depuis Paris, Bordeaux et Lyon'
+    train: 'Gare de TrucBidule à 2 km avec des liaisons directes <br> depuis Paris, Bordeaux et Lyon'
     car: 'Accès facile par l''autoroute A6'
     parking: 'Stationnement privé gratuit sur la propriété'
     

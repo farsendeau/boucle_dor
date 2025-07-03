@@ -25,6 +25,10 @@ vich_uploader:
             uri_prefix: /images/service
             upload_destination: '%kernel.project_dir%/public/images/service'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        activity_images:
+            uri_prefix: /images/activity
+            upload_destination: '%kernel.project_dir%/public/images/activity'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
     #mappings:
     #    products:
     #        uri_prefix: /images/products
