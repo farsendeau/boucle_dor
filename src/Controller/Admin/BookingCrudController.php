@@ -24,6 +24,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 
 class BookingCrudController extends AbstractCrudController
 {
@@ -75,6 +76,11 @@ class BookingCrudController extends AbstractCrudController
                 ->setRequired(true),
 
             IntegerField::new('nbChild', 'Nb enfants'),
+
+            MoneyField::new('price', 'Prix nuitée')
+                ->setCurrency('EUR')
+                ->setStoredAsCents(false)
+                ->hideOnForm(),
 
             MoneyField::new('totalPrice', 'Prix total')
                 ->setCurrency('EUR')
@@ -143,6 +149,25 @@ class BookingCrudController extends AbstractCrudController
             ->add(Crud::PAGE_DETAIL, $rejectAction)
             ->disable(Action::NEW)
             ->disable(Action::DELETE);
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Booking) {
+            if ($entityInstance->getGite() && !$entityInstance->getPrice()) {
+                $entityInstance->setPrice($entityInstance->getGite()->getPrice());
+            }
+            $entityInstance->calculateTotalPrice();
+        }
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Booking) {
+            $entityInstance->calculateTotalPrice();
+        }
+        parent::updateEntity($entityManager, $entityInstance);
     }
 
     #[Route('/admin/booking/validate/{id}', name: 'admin_booking_validate', methods: ['GET'])]

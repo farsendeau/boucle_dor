@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 #[IsGranted('ROLE_ADMIN')]
@@ -38,7 +39,9 @@ class GiteCrudController extends AbstractCrudController
             TextareaField::new('description', 'Description')
                 ->setFormTypeOption('translation_domain', false),
             IntegerField::new('price', 'Prix de la nuitée')
-                ->setFormTypeOption('translation_domain', false),
+                ->setFormTypeOption('translation_domain', false)
+                ->setFormTypeOption('constraints', [new PositiveOrZero()])
+                ->setFormTypeOption('attr', ['min' => 0]),
             BooleanField::new('onHomepage', 'Mettre en avant sur la page d\'accueil')
                 ->setFormTypeOption('translation_domain', false),
             TextField::new('backgroundImage', 'Image de fond')

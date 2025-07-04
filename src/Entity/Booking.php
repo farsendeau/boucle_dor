@@ -45,6 +45,9 @@ class Booking
     #[ORM\Column]
     private ?int $totalPrice = null;
 
+    #[ORM\Column]
+    private ?int $price = null;
+
     #[ORM\Column(length: 50, enumType: BookingStatus::class)]
     private ?BookingStatus $status = null;
 
@@ -187,11 +190,22 @@ class Booking
         return $this;
     }
 
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): static
+    {
+        $this->price = $price;
+        return $this;
+    }
+
     public function calculateTotalPrice(): void
     {
-        if ($this->dateArrival && $this->dateDeparture && $this->gite) {
+        if ($this->dateArrival && $this->dateDeparture && $this->price) {
             $days = $this->dateArrival->diff($this->dateDeparture)->days;
-            $this->totalPrice = $days * $this->gite->getPrice();
+            $this->totalPrice = $days * $this->price;
         }
     }
 

@@ -64,9 +64,6 @@ final class GiteController extends AbstractController
                 return $this->redirectToRoute('gite_show', ['slug' => $gite->getSlug()]);
             }
 
-            // Calculate total price
-            $booking->calculateTotalPrice();
-
             // Persist booking
             $this->bookingRepository->save($booking, true);
 
